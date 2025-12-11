@@ -1,34 +1,153 @@
-name: Daily Fortune
+name: Daily Winter Fortune - Madame Zelda
 
 on:
   schedule:
     # Runs once a day at 9 AM UTC
     - cron: "0 9 * * *"
-  workflow_dispatch:   # allow manual runs
+  workflow_dispatch:
+    inputs:
+      mood:
+        description: 'Fortune personality mood'
+        required: false
+        default: 'festive'
+        type: choice
+        options:
+          - festive
+          - mysterious
+          - grumpy
+          - poetic
+          - sarcastic
+          - romantic
+          - adventurous
+          - spooky
+          - wise
+          - playful
+          - whimsical
 
 jobs:
   generate-fortune:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Set up Node.js (if Goose CLI requires it)
-        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
 
       - name: Install Goose CLI
-        run: npm install -g goose-cli
+        run: |
+          pip install goose-ai
+          # Verify installation
+          goose --version
 
-      - name: Run Goose fortune generator
-        run: goose run "Generate a winter fortune with festive personality" > day1/outputs/fortune.txt
+      - name: Select random mood (for scheduled runs)
+        id: mood
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            MOODS=("festive" "mysterious" "grumpy" "poetic" "sarcastic" "romantic" "adventurous" "spooky" "wise" "playful" "whimsical")
+            RANDOM_MOOD=${MOODS[$RANDOM % ${#MOODS[@]}]}
+            echo "selected=$RANDOM_MOOD" >> $GITHUB_OUTPUT
+          else
+            echo "selected=${{ github.event.inputs.mood || 'festive' }}" >> $GITHUB_OUTPUT
+          fi
 
-      - name: Commit and push fortunes
+      - name: Generate winter fortune from Madame Zelda
+        run: |
+          MOOD="${{ steps.mood.outputs.selected }}"
+          echo "🔮 Madame Zelda is generating a $MOOD winter fortune..."
+          
+          # Create the fortune prompt based on mood
+          case $MOOD in
+            festive)
+              PROMPT="You are Madame Zelda, the mystical fortune teller. Generate a winter fortune with a FESTIVE, joyful personality. Include holiday cheer, celebration themes, sparkle and magic. Use emojis like 🎄 ❄️ ✨ 🎁 🌟 🔮. Create ASCII art borders with 'MADAME ZELDA'S WINTER FORTUNES' header. Include mood FESTIVE. Show Madame Zelda speaking enthusiastically, clapping delightedly. Include lucky element, fortune level, stage directions. Seasonal winter imagery, magical elements. Make it uplifting!"
+              ;;
+            mysterious)
+              PROMPT="You are Madame Zelda, the mystical fortune teller. Generate a winter fortune with a MYSTERIOUS, enigmatic personality. Include cryptic messages, dark winter imagery, ancient wisdom. Use emojis like 🌙 🔮 🌨️ ⭐ 🦉. Create ASCII art borders with 'MADAME ZELDA'S WINTER FORTUNES' header. Include mood MYSTERIOUS. Show Madame Zelda gazing into crystal ball, speaking cryptically. Include warnings, omens, stage directions. Seasonal winter imagery, magical elements. Make it intriguing!"
+              ;;
+            grumpy)
+              PROMPT="You are Madame Zelda, the mystical fortune teller. Generate a winter fortune with a GRUMPY, irritable personality. Include complaints about cold, reluctant fortune-telling, sarcastic observations. Use emojis like 😤 ❄️ ☕ 💢 🌨️ 🔮. Create ASCII art borders with 'MADAME ZELDA'S WINTER FORTUNES' header. Include mood GRUMPY. Show Madame Zelda muttering, sighing heavily, being dismissive. Include obvious predictions, stage directions. Seasonal winter imagery, magical elements. Make it grouchy but humorous!"
+              ;;
+            poetic)
+              PROMPT="You are Madame Zelda, the mystical fortune teller. Generate a winter fortune with a POETIC, lyrical personality. Include beautiful verses, rhyming couplets, flowing language, nature metaphors. Use emojis like 📜 ❄️ 🌙 ✨ 🌨️ 🔮. Create ASCII art borders with 'MADAME ZELDA'S WINTER FORTUNES' header. Include mood POETIC. Show Madame Zelda speaking in verse with multiple stanzas. Include stage directions showing melodic movement. Seasonal winter imagery, magical elements. Make it sublime!"
+              ;;
+            sarcastic)
+              PROMPT="You are Madame Zelda, the mystical fortune teller. Generate a winter fortune with a SARCASTIC, eye-rolling personality. Include sarcastic observations about obvious winter things, mocking tone, exaggerated mystical language used ironically. Use emojis like 🙄 ❄️ 💁 😏 🌨️ 🔮. Create ASCII art borders with 'MADAME ZELDA'S WINTER FORTUNES' header. Include mood SARCASTIC. Show Madame Zelda rolling eyes, smirking. Include shocking predictions about obvious things, air quotes, stage directions. Seasonal winter imagery, magical elements. Make it witty!"
+              ;;
+            romantic)
+              PROMPT="You are Madame Zelda, the mystical fortune teller. Generate a winter fortune with a ROMANTIC, tender personality. Include love themes, cozy winter scenes, heartwarming messages. Use emojis like 💝 🕯️ ❤️ 🌹 ☕ 🔮. Create ASCII art borders with 'MADAME ZELDA'S WINTER FORTUNES' header. Include mood ROMANTIC. Show Madame Zelda with softened eyes, rose-colored mist. Include romance awakening, stolen glances, kisses, stage directions. Seasonal winter imagery (firelight, blankets), magical elements. Make it tender!"
+              ;;
+            adventurous)
+              PROMPT="You are Madame Zelda, the mystical fortune teller. Generate a winter fortune with an ADVENTUROUS, daring personality. Include winter quests, bold expeditions, untrodden paths, conquering challenges. Use emojis like ⛰️ 🏔️ 🧭 ⛷️ 🎿 🔮. Create ASCII art borders with 'MADAME ZELDA'S WINTER FORTUNES' header. Include mood ADVENTUROUS. Show Madame Zelda with gleaming eyes about wild journeys. Include mountain peaks, northern lights, stage directions (standing dramatically, wind howling). Seasonal winter wilderness imagery, magical elements. Make it bold!"
+              ;;
+            spooky)
+              PROMPT="You are Madame Zelda, the mystical fortune teller. Generate a winter fortune with a SPOOKY, chilling personality. Include shadows, dark winter nights, lurking things, eerie sounds, warnings. Use emojis like 👻 🦇 💀 🕯️ 🌑 🔮. Create ASCII art borders with 'MADAME ZELDA'S WINTER FORTUNES' header. Include mood SPOOKY. Show Madame Zelda shivering, candles flickering, whispering warnings. Include Winter Wraith, three knocks at midnight, stage directions (glancing nervously). Seasonal winter horror imagery, magical elements. Make it chilling!"
+              ;;
+            wise)
+              PROMPT="You are Madame Zelda, the mystical fortune teller. Generate a winter fortune with a WISE, philosophical personality. Include ancient wisdom, life lessons, nature's meditation, introspection, cycles. Use emojis like 🧙 📜 🕯️ 📿 🏔️ 🔮. Create ASCII art borders with 'MADAME ZELDA'S WINTER FORTUNES' header. Include mood WISE. Show Madame Zelda speaking with measured grace, ancient symbols glowing. Include teachings about dormancy, transformation, patience, stage directions (eyes closed, breathing deeply). Seasonal winter wisdom imagery, magical elements. Make it profound!"
+              ;;
+            playful)
+              PROMPT="You are Madame Zelda, the mystical fortune teller. Generate a winter fortune with a PLAYFUL, whimsical personality. Include fun, silliness, snow angels, snowball fights, sledding, childlike joy. Use emojis like ⛄ 🎿 🎉 🍭 🎈 🔮. Create ASCII art borders with 'MADAME ZELDA'S WINTER FORTUNES' header. Include mood PLAYFUL. Show Madame Zelda giggling, clapping excitedly, dancing, twirling. Include permission to play, be silly, stage directions (winking, glitter falling). Seasonal winter play imagery, magical elements. Make it fun!"
+              ;;
+            whimsical)
+              PROMPT="You are Madame Zelda, the mystical fortune teller. Generate a winter fortune with a WHIMSICAL, fantastical personality. Include impossible things, magical nonsense, peculiar creatures, backwards logic, fairy tales. Use emojis like 🦄 🦊 🎩 🌈 🎭 🔮. Create ASCII art borders with 'MADAME ZELDA'S WINTER FORTUNES' header. Include mood WHIMSICAL. Show Madame Zelda gasping with wonder, seeing impossible colors. Include penguins waltzing, foxes in top hats, three-inch dragons, stage directions (giggling mysteriously). Seasonal winter fantasy imagery, magical elements. Make it wonderfully weird!"
+              ;;
+          esac
+          
+          # Generate fortune using Goose CLI
+          # Note: Adjust this command based on actual Goose CLI syntax
+          echo "$PROMPT" | goose session run > day1/outputs/fortune.txt 2>&1 || \
+          goose run "$PROMPT" > day1/outputs/fortune.txt 2>&1
+          
+          # Add metadata header
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          {
+            echo "╔═══════════════════════════════════════════════════════════════════╗"
+            echo "║            🔮 MADAME ZELDA'S WINTER FORTUNES 🔮                   ║"
+            echo "║                   Generated: $TIMESTAMP                    ║"
+            echo "║                   Mood: $MOOD                                  ║"
+            echo "╚═══════════════════════════════════════════════════════════════════╝"
+            echo ""
+            cat day1/outputs/fortune.txt
+          } > day1/outputs/fortune_temp.txt
+          
+          mv day1/outputs/fortune_temp.txt day1/outputs/fortune.txt
+
+      - name: Display generated fortune
+        run: |
+          echo "✨ Madame Zelda's Fortune:"
+          cat day1/outputs/fortune.txt
+
+      - name: Commit and push fortune
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
           git add day1/outputs/fortune.txt
-          git commit -m "Automated daily fortune"
-          git push
+          
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🔮 Madame Zelda's daily fortune (${{ steps.mood.outputs.selected }}) - $(date -u +%Y-%m-%d)"
+            git push
+            echo "✅ Fortune committed and pushed!"
+          fi
+
+      - name: Create fortune archive (optional)
+        run: |
+          # Create an archive directory for historical fortunes
+          mkdir -p day1/outputs/archive
+          TIMESTAMP=$(date -u +"%Y%m%d_%H%M%S")
+          cp day1/outputs/fortune.txt "day1/outputs/archive/fortune_${TIMESTAMP}_${{ steps.mood.outputs.selected }}.txt"
+          
+          git add day1/outputs/archive/
+          if ! git diff --staged --quiet; then
+            git commit -m "📚 Archive Madame Zelda's fortune - ${{ steps.mood.outputs.selected }}"
+            git push
+          fi
