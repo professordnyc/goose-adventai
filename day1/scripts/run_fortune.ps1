@@ -32,7 +32,8 @@
 
 param(
     [ValidateSet("festive", "mysterious", "grumpy", "poetic", "sarcastic", "romantic", "adventurous", "spooky", "wise", "playful", "whimsical")]
-    [string]$Mood = "festive"
+    [string]$Mood = "festive",
+    [switch]$Detailed
 )
 
 # Define paths
@@ -193,44 +194,45 @@ Generate a winter fortune with a WHIMSICAL, fantastical personality. Include:
 Make it wonderfully weird, delightfully strange, and impossibly charming!
 "@
 }
+# Timestamp and header
+$Timestamp = (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss UTC")
+$Header = @"
+╔═══════════════════════════════════════════════════════════════════╗
+║        🔮 MADAME ZELDA'S WINTER FORTUNES - ALL MOODS 🔮           ║
+║                   Generated: $Timestamp                           ║
+╚═══════════════════════════════════════════════════════════════════╝
 
-# Get the prompt for the selected mood
-$Prompt = $MoodPrompts[$Mood]
+📖 Table of Contents:
+"@
 
-Write-Host "🔮 Madame Zelda is generating a $Mood winter fortune..." -ForegroundColor Magenta
-Write-Host ""
+# Add TOC
+$Index = 1
+foreach ($m in $MoodPrompts.Keys) {
+    $Header += "  $Index. $m`n"
+    $Index++
+}
+$Header += "`n═══════════════════════════════════════════════════════════════════`n`n"
 
-# Check if Goose CLI is available
-$GooseCommand = Get-Command goose -ErrorAction SilentlyContinue
+# Write header to file
+$Header | Out-File -FilePath $OutputFile -Encoding UTF8 -Force
 
-if (-not $GooseCommand) {
-    Write-Host "⚠️  Goose CLI not found in PATH." -ForegroundColor Yellow
-    Write-Host "Please install Goose CLI first:" -ForegroundColor Yellow
-    Write-Host "  pip install goose-ai" -ForegroundColor White
-    Write-Host "  or" -ForegroundColor White
-    Write-Host "  pipx install goose-ai" -ForegroundColor White
-    exit 1
+# Loop through moods
+foreach ($m in $MoodPrompts.Keys) {
+    Write-Host ">>> Generating $m fortune..." -ForegroundColor Cyan
+    Add-Content -Path $OutputFile -Value "### Fortune: $m"
+
+    $Prompt = $MoodPrompts[$m]
+    $FortuneOutput = & goose run --instructions $Prompt 2>&1
+
+    Add-Content -Path $OutputFile -Value $FortuneOutput
+    Add-Content -Path $OutputFile -Value "`n───────────────────────────────────────────────────────────────────`n"
 }
 
-try {
-    Write-Host "Invoking Goose CLI..." -ForegroundColor Cyan
-    
-    # Wrap goose run: Pass the prompt and pipe output to fortune.txt
-    # Using goose run with the prompt as argument
-    $FortuneOutput = & goose run $Prompt 2>&1
-    
-    # Pipe output to outputs/fortune.txt
-    $FortuneOutput | Out-File -FilePath $OutputFile -Encoding UTF8 -Force
-    
-    Write-Host "✅ Madame Zelda's fortune generated successfully!" -ForegroundColor Green
-    Write-Host "📄 Saved to: $OutputFile" -ForegroundColor Green
-    Write-Host ""
-    Write-Host "═══════════════════════════════════════" -ForegroundColor Magenta
-    Get-Content $OutputFile | Write-Host -ForegroundColor White
-    Write-Host "═══════════════════════════════════════" -ForegroundColor Magenta
-    
-} catch {
-    Write-Host "❌ Error generating fortune: $_" -ForegroundColor Red
-    Write-Host "Error details: $($_.Exception.Message)" -ForegroundColor Red
-    exit 1
-}
+# Archive copy
+$ArchiveDir = Join-Path $OutputDir "archive"
+if (-not (Test-Path $ArchiveDir)) { New-Item -ItemType Directory -Path $ArchiveDir | Out-Null }
+$ArchiveFile = Join-Path $ArchiveDir ("fortune_all_{0}.txt" -f (Get-Date -Format "yyyyMMdd_HHmmss"))
+Copy-Item $OutputFile $ArchiveFile -Force
+
+Write-Host "✅ Consolidated fortunes saved to $OutputFile" -ForegroundColor Green
+Write-Host "📚 Archived copy saved to $ArchiveFile" -ForegroundColor Green
