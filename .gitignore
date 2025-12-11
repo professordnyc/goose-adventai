@@ -1,0 +1,35 @@
+# Advent of AI Project - Git Ignore
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Local environment configs
+.env.local
+
+# Goose hints (local-only, not for repo)
+.goosehints
+
+# Logs
+*.log
+
+# Python cache (if used for scripts)
+__pycache__/
+*.pyc
+
+# Node modules (if you experiment with JS tooling)
+node_modules/
+
+# Build artifacts
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+
+# VS Code settings (optional, keep if you want to share workspace config)
+.vscode/
