@@ -1,0 +1,92 @@
+name: Daily Winter Fortune - Madame Zelda (All Moods)
+
+on:
+  schedule:
+    # Runs once a day at 9 AM UTC
+    - cron: "0 9 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  generate-fortune:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Goose CLI
+        run: |
+          pip install goose-ai
+          goose --version
+
+      - name: Generate fortunes for all moods
+        run: |
+          MOODS=("festive" "mysterious" "grumpy" "poetic" "sarcastic" "romantic" "adventurous" "spooky" "wise" "playful" "whimsical")
+          OUTPUT="day1/outputs/fortune.txt"
+          
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          
+          # Header with Table of Contents
+          echo "╔═══════════════════════════════════════════════════════════════════╗" > $OUTPUT
+          echo "║        🔮 MADAME ZELDA'S WINTER FORTUNES - ALL MOODS 🔮           ║" >> $OUTPUT
+          echo "║                   Generated: $TIMESTAMP                           ║" >> $OUTPUT
+          echo "╚═══════════════════════════════════════════════════════════════════╝" >> $OUTPUT
+          echo "" >> $OUTPUT
+          echo "📖 Table of Contents:" >> $OUTPUT
+          INDEX=1
+          for MOOD in "${MOODS[@]}"; do
+            echo "  $INDEX. $MOOD" >> $OUTPUT
+            INDEX=$((INDEX+1))
+          done
+          echo "" >> $OUTPUT
+          echo "═══════════════════════════════════════════════════════════════════" >> $OUTPUT
+          echo "" >> $OUTPUT
+          
+          # Loop through moods and append fortunes
+          for MOOD in "${MOODS[@]}"; do
+            echo ">>> Generating $MOOD fortune..."
+            echo "### Fortune: $MOOD" >> $OUTPUT
+            pwsh day1/scripts/run_fortune.ps1 -Mood $MOOD -Detailed >> $OUTPUT
+            echo "" >> $OUTPUT
+            echo "───────────────────────────────────────────────────────────────────" >> $OUTPUT
+            echo "" >> $OUTPUT
+          done
+
+      - name: Display generated fortunes
+        run: |
+          echo "✨ Madame Zelda's Fortunes (All Moods):"
+          cat day1/outputs/fortune.txt
+
+      - name: Commit and push consolidated fortune
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add day1/outputs/fortune.txt
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🔮 Madame Zelda's daily fortunes (all moods) - $(date -u +%Y-%m-%d)"
+            git push
+            echo "✅ Consolidated fortune committed and pushed!"
+          fi
+
+      - name: Archive consolidated fortune
+        run: |
+          mkdir -p day1/outputs/archive
+          TIMESTAMP=$(date -u +"%Y%m%d_%H%M%S")
+          cp day1/outputs/fortune.txt "day1/outputs/archive/fortune_all_${TIMESTAMP}.txt"
+          
+          git add day1/outputs/archive/
+          if ! git diff --staged --quiet; then
+            git commit -m "📚 Archive Madame Zelda's consolidated fortunes"
+            git push
