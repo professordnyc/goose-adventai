@@ -25,7 +25,8 @@ jobs:
       - name: Install Goose CLI and dependencies
         run: |
           pip install goose-ai
-          pip install langfuse
+          pip install langfuse "langfuse<=2.59.7"
+
           goose --version
 
       - name: Generate fortunes for all moods
