@@ -22,9 +22,10 @@ jobs:
           python-version: '3.11'
           # cache: 'pip'
 
-      - name: Install Goose CLI
+      - name: Install Goose CLI and dependencies
         run: |
           pip install goose-ai
+          pip install langfuse
           goose --version
 
       - name: Generate fortunes for all moods
