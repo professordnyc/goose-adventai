@@ -1,94 +1,97 @@
-name: Daily Winter Fortune - Madame Zelda (All Moods)
+name: Madame Zelda Fortunes
 
 on:
   schedule:
-    # Runs once a day at 9 AM UTC
-    - cron: "0 9 * * *"
-  workflow_dispatch: {}
+    - cron: '0 9 * * *'   # Daily at 9 AM UTC
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Run mode'
+        required: true
+        default: 'single'
+        type: choice
+        options:
+          - single   # one random mood
+          - all      # all 11 moods
+
+permissions:
+  contents: write
 
 jobs:
   generate-fortune:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          # cache: 'pip'
 
-      - name: Install Goose CLI and dependencies
+      - name: Install Goose CLI
         run: |
           pip install goose-ai
-          pip install langfuse "langfuse<=2.59.7"
-
+          pip install "langfuse<=2.59.7" || true
           goose --version
 
-      - name: Generate fortunes for all moods
+      - name: Generate fortunes
+        shell: bash
         run: |
           MOODS=("festive" "mysterious" "grumpy" "poetic" "sarcastic" "romantic" "adventurous" "spooky" "wise" "playful" "whimsical")
           OUTPUT="day1/outputs/fortune.txt"
-          
           TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          
-          # Header with Table of Contents
+
+          mkdir -p day1/outputs day1/outputs/archive
+
           echo "╔═══════════════════════════════════════════════════════════════════╗" > $OUTPUT
-          echo "║        🔮 MADAME ZELDA'S WINTER FORTUNES - ALL MOODS 🔮           ║" >> $OUTPUT
+          echo "║        🔮 MADAME ZELDA'S WINTER FORTUNES                          ║" >> $OUTPUT
           echo "║                   Generated: $TIMESTAMP                           ║" >> $OUTPUT
           echo "╚═══════════════════════════════════════════════════════════════════╝" >> $OUTPUT
           echo "" >> $OUTPUT
-          echo "📖 Table of Contents:" >> $OUTPUT
-          INDEX=1
-          for MOOD in "${MOODS[@]}"; do
-            echo "  $INDEX. $MOOD" >> $OUTPUT
-            INDEX=$((INDEX+1))
-          done
-          echo "" >> $OUTPUT
-          echo "═══════════════════════════════════════════════════════════════════" >> $OUTPUT
-          echo "" >> $OUTPUT
-          
-          # Loop through moods and append fortunes
-          for MOOD in "${MOODS[@]}"; do
-            echo ">>> Generating $MOOD fortune..."
-            echo "### Fortune: $MOOD" >> $OUTPUT
-            pwsh day1/scripts/run_fortune.ps1 -Mood $MOOD -Detailed >> $OUTPUT
-            echo "" >> $OUTPUT
-            echo "───────────────────────────────────────────────────────────────────" >> $OUTPUT
-            echo "" >> $OUTPUT
-          done
+
+          if [[ "${{ github.event.inputs.mode }}" == "all" ]]; then
+            # Generate all moods
+            for MOOD in "${MOODS[@]}"; do
+              echo ">>> Generating $MOOD fortune..."
+              echo "### Fortune: $MOOD" >> $OUTPUT
+              pwsh day1/scripts/run_fortune.ps1 -Mood $MOOD -Detailed >> $OUTPUT
+              echo "" >> $OUTPUT
+              echo "───────────────────────────────────────────────────────────────────" >> $OUTPUT
+              echo "" >> $OUTPUT
+            done
+          else
+            # Generate one random mood
+            RANDOM_MOOD=${MOODS[$RANDOM % ${#MOODS[@]}]}
+            echo ">>> Generating $RANDOM_MOOD fortune..."
+            echo "### Fortune: $RANDOM_MOOD" >> $OUTPUT
+            pwsh day1/scripts/run_fortune.ps1 -Mood $RANDOM_MOOD -Detailed >> $OUTPUT
+          fi
 
       - name: Display generated fortunes
-        run: |
-          echo "✨ Madame Zelda's Fortunes (All Moods):"
-          cat day1/outputs/fortune.txt
+        run: cat day1/outputs/fortune.txt
 
-      - name: Commit and push consolidated fortune
+      - name: Commit and push fortunes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add day1/outputs/fortune.txt
-          
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add day1/outputs/fortune.txt day1/outputs/archive/
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "🔮 Madame Zelda's daily fortunes (all moods) - $(date -u +%Y-%m-%d)"
+            git commit -m "🔮 Madame Zelda's fortunes - $(date -u +%Y-%m-%d)"
             git push
-            echo "✅ Consolidated fortune committed and pushed!"
           fi
 
-      - name: Archive consolidated fortune
+      - name: Archive fortune
         run: |
-          mkdir -p day1/outputs/archive
           TIMESTAMP=$(date -u +"%Y%m%d_%H%M%S")
-          cp day1/outputs/fortune.txt "day1/outputs/archive/fortune_all_${TIMESTAMP}.txt"
-          
+          cp day1/outputs/fortune.txt "day1/outputs/archive/fortune_${TIMESTAMP}.txt"
           git add day1/outputs/archive/
           if ! git diff --staged --quiet; then
-            git commit -m "📚 Archive Madame Zelda's consolidated fortunes"
+            git commit -m "📚 Archive Madame Zelda's fortunes"
             git push
+          fi
