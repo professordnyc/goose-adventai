@@ -1,0 +1,332 @@
+/* ===================================
+   WINTER PATH HOME - FESTIVE STYLING
+   =================================== */
+
+/* CSS Variables for Winter Theme */
+:root {
+  --snow-white: #FFFFFF;
+  --ice-blue: #E3F2FD;
+  --frost-blue: #BBDEFB;
+  --winter-blue: #64B5F6;
+  --deep-blue: #1976D2;
+  --text-dark: #263238;
+  --text-light: #546E7A;
+  --success-green: #81C784;
+  --error-red: #E57373;
+  --gold-accent: #FFD54F;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --font-story: 'Merriweather', serif;
+  --font-ui: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-story);
+  background: linear-gradient(180deg, var(--ice-blue) 0%, var(--frost-blue) 100%);
+  min-height: 100vh;
+  padding: var(--spacing-lg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+  color: var(--winter-blue);
+  margin-bottom: 1rem;
+}
+
+.modal-content p {
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+
+.modal-btn {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-family: var(--font-ui);
+  background: var(--winter-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-btn:hover {
+  background: var(--deep-blue);
+  transform: translateY(-2px);
+}
+
+.modal-btn.secondary {
+  background: var(--text-light);
+}
+
+.modal-btn.secondary:hover {
+  background: var(--text-dark);
+}
+
+/* GAME CONTAINER */
+#game {
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: var(--spacing-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 60px rgba(100, 181, 246, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--frost-blue);
+}
+
+h1 {
+  font-family: var(--font-ui);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--winter-blue);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+}
+
+/* STATS */
+.stats {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+.stats.hidden {
+  display: none;
+}
+
+.stats strong {
+  color: var(--winter-blue);
+}
+
+/* STORY TEXT */
+#story {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-dark);
+}
+
+#story p {
+  margin-bottom: var(--spacing-md);
+}
+
+.artifact {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--gold-accent);
+  text-shadow: 0 0 10px rgba(255, 213, 79, 0.5);
+  font-weight: bold;
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, rgba(255, 213, 79, 0.1), rgba(255, 213, 79, 0.2));
+  border-radius: 8px;
+  border: 2px solid var(--gold-accent);
+}
+
+.snowflake-img {
+  width: 80px;
+  height: 80px;
+  margin: 1rem auto;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(255, 213, 79, 0.5));
+}
+
+/* CHOICES */
+#choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.choice-btn {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-family: var(--font-ui);
+  background: var(--snow-white);
+  color: var(--text-dark);
+  border: 2px solid var(--winter-blue);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.choice-btn:hover {
+  background: var(--ice-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(100, 181, 246, 0.3);
+  border-color: var(--deep-blue);
+}
+
+.choice-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.choice-btn.correct {
+  background: var(--success-green) !important;
+  color: white !important;
+  border-color: var(--success-green) !important;
+  animation: pulse-correct 0.5s ease;
+}
+
+.choice-btn.incorrect {
+  background: var(--error-red) !important;
+  color: white !important;
+  border-color: var(--error-red) !important;
+  animation: shake 0.5s ease;
+}
+
+/* ANIMATIONS */
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-correct {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+/* FALLING SNOWFLAKES */
+.snowflake {
+  position: fixed;
+  color: white;
+  font-size: 1.5rem;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  body {
+    padding: var(--spacing-md);
+  }
+  
+  #game {
+    padding: var(--spacing-md);
+    border-radius: 12px;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  #story {
+    font-size: 1rem;
+  }
+  
+  .choice-btn {
+    padding: 0.875rem 1rem;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.25rem;
+  }
+  
+  #story {
+    font-size: 0.9375rem;
+  }
+}
+
+.choice-btn:focus {
+  outline: 3px solid var(--deep-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

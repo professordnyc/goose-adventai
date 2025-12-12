@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>❄️ The Winter Path Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@0;1&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Continue Modal -->
+  <div id="continue-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>❄️ Welcome Back!</h2>
+      <p>You have a saved adventure in progress.</p>
+      <button id="continue-btn" class="modal-btn">Continue Adventure</button>
+      <button id="new-game-btn" class="modal-btn secondary">Start New Game</button>
+    </div>
+  </div>
+
+  <div id="game">
+    <header>
+      <h1>❄️ The Winter Path Home</h1>
+      <div id="stats" class="stats hidden">
+        <span>Turns: <strong id="turns">0</strong></span>
+        <span>Correct: <strong id="correct">0</strong></span>
+        <span>Score: <strong id="score-display">0</strong></span>
+      </div>
+    </header>
+    <main id="story"></main>
+    <div id="choices"></div>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
