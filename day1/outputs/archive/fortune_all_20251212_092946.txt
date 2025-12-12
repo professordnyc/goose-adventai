@@ -117,5 +117,3 @@ Error: No such option: --instructions Did you mean --tracing?
 
 ───────────────────────────────────────────────────────────────────
 
-✅ Consolidated fortunes saved to /home/runner/work/goose-adventai/goose-adventai/day1/outputs/fortune.txt
-📚 Archived copy saved to /home/runner/work/goose-adventai/goose-adventai/day1/outputs/archive/fortune_all_20251212_092946.txt

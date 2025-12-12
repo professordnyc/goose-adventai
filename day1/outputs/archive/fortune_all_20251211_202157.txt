@@ -1,31 +1,22 @@
 ╔═══════════════════════════════════════════════════════════════════╗
 ║        🔮 MADAME ZELDA'S WINTER FORTUNES - ALL MOODS 🔮           ║
-║                   Generated: 2025-12-12 09:29:15 UTC                           ║
+║                   Generated: 2025-12-11 20:21:27 UTC                           ║
 ╚═══════════════════════════════════════════════════════════════════╝
 
-📖 Table of Contents:  1. sarcastic
-  2. festive
-  3. wise
-  4. playful
-  5. romantic
-  6. grumpy
+📖 Table of Contents:  1. festive
+  2. sarcastic
+  3. grumpy
+  4. poetic
+  5. wise
+  6. adventurous
   7. spooky
-  8. whimsical
+  8. playful
   9. mysterious
-  10. adventurous
-  11. poetic
+  10. romantic
+  11. whimsical
 
 ═══════════════════════════════════════════════════════════════════
 
-
->>> Generating sarcastic fortune...
-### Fortune: sarcastic
-Usage: goose run [OPTIONS] [MESSAGE_FILE]
-Try 'goose run --help' for help.
-System.Management.Automation.RemoteException
-Error: No such option: --instructions Did you mean --tracing?
-
-───────────────────────────────────────────────────────────────────
 
 >>> Generating festive fortune...
 ### Fortune: festive
@@ -36,26 +27,8 @@ Error: No such option: --instructions Did you mean --tracing?
 
 ───────────────────────────────────────────────────────────────────
 
->>> Generating wise fortune...
-### Fortune: wise
-Usage: goose run [OPTIONS] [MESSAGE_FILE]
-Try 'goose run --help' for help.
-System.Management.Automation.RemoteException
-Error: No such option: --instructions Did you mean --tracing?
-
-───────────────────────────────────────────────────────────────────
-
->>> Generating playful fortune...
-### Fortune: playful
-Usage: goose run [OPTIONS] [MESSAGE_FILE]
-Try 'goose run --help' for help.
-System.Management.Automation.RemoteException
-Error: No such option: --instructions Did you mean --tracing?
-
-───────────────────────────────────────────────────────────────────
-
->>> Generating romantic fortune...
-### Fortune: romantic
+>>> Generating sarcastic fortune...
+### Fortune: sarcastic
 Usage: goose run [OPTIONS] [MESSAGE_FILE]
 Try 'goose run --help' for help.
 System.Management.Automation.RemoteException
@@ -72,8 +45,8 @@ Error: No such option: --instructions Did you mean --tracing?
 
 ───────────────────────────────────────────────────────────────────
 
->>> Generating spooky fortune...
-### Fortune: spooky
+>>> Generating poetic fortune...
+### Fortune: poetic
 Usage: goose run [OPTIONS] [MESSAGE_FILE]
 Try 'goose run --help' for help.
 System.Management.Automation.RemoteException
@@ -81,17 +54,8 @@ Error: No such option: --instructions Did you mean --tracing?
 
 ───────────────────────────────────────────────────────────────────
 
->>> Generating whimsical fortune...
-### Fortune: whimsical
-Usage: goose run [OPTIONS] [MESSAGE_FILE]
-Try 'goose run --help' for help.
-System.Management.Automation.RemoteException
-Error: No such option: --instructions Did you mean --tracing?
-
-───────────────────────────────────────────────────────────────────
-
->>> Generating mysterious fortune...
-### Fortune: mysterious
+>>> Generating wise fortune...
+### Fortune: wise
 Usage: goose run [OPTIONS] [MESSAGE_FILE]
 Try 'goose run --help' for help.
 System.Management.Automation.RemoteException
@@ -108,8 +72,8 @@ Error: No such option: --instructions Did you mean --tracing?
 
 ───────────────────────────────────────────────────────────────────
 
->>> Generating poetic fortune...
-### Fortune: poetic
+>>> Generating spooky fortune...
+### Fortune: spooky
 Usage: goose run [OPTIONS] [MESSAGE_FILE]
 Try 'goose run --help' for help.
 System.Management.Automation.RemoteException
@@ -117,5 +81,39 @@ Error: No such option: --instructions Did you mean --tracing?
 
 ───────────────────────────────────────────────────────────────────
 
-✅ Consolidated fortunes saved to /home/runner/work/goose-adventai/goose-adventai/day1/outputs/fortune.txt
-📚 Archived copy saved to /home/runner/work/goose-adventai/goose-adventai/day1/outputs/archive/fortune_all_20251212_092946.txt
+>>> Generating playful fortune...
+### Fortune: playful
+Usage: goose run [OPTIONS] [MESSAGE_FILE]
+Try 'goose run --help' for help.
+System.Management.Automation.RemoteException
+Error: No such option: --instructions Did you mean --tracing?
+
+───────────────────────────────────────────────────────────────────
+
+>>> Generating mysterious fortune...
+### Fortune: mysterious
+Usage: goose run [OPTIONS] [MESSAGE_FILE]
+Try 'goose run --help' for help.
+System.Management.Automation.RemoteException
+Error: No such option: --instructions Did you mean --tracing?
+
+───────────────────────────────────────────────────────────────────
+
+>>> Generating romantic fortune...
+### Fortune: romantic
+Usage: goose run [OPTIONS] [MESSAGE_FILE]
+Try 'goose run --help' for help.
+System.Management.Automation.RemoteException
+Error: No such option: --instructions Did you mean --tracing?
+
+───────────────────────────────────────────────────────────────────
+
+>>> Generating whimsical fortune...
+### Fortune: whimsical
+Usage: goose run [OPTIONS] [MESSAGE_FILE]
+Try 'goose run --help' for help.
+System.Management.Automation.RemoteException
+Error: No such option: --instructions Did you mean --tracing?
+
+───────────────────────────────────────────────────────────────────
+
