@@ -31,7 +31,9 @@ Prompt:
 > Use the data at day3/hotcocoa_results.txt  
 > Generate a tournament bracket chart showing progression of recipes through each round and the final winner.
 
-![Bracket Chart](day3/images/bracket.png)
+![Bracket Chart](https://github.com/professordnyc/goose-adventai/blob/main/day3/images/bracket.png)
+
+
 
 ---
 
@@ -40,7 +42,8 @@ Prompt:
 > Use the data at day3/hotcocoa_results.txt  
 > Create a bar chart showing the number of votes each recipe received in each round.
 
-![Vote Chart](day3/images/votes.png)
+![Vote Chart](https://github.com/professordnyc/goose-adventai/blob/main/day3/images/votes.png)
+
 
 ---
 
@@ -49,4 +52,4 @@ Prompt:
 > Use the data at day3/hotcocoa_results.txt  
 > Make a radar chart comparing sweetness, richness, and spice for the finalist recipes.
 
-![Radar Chart](day3/images/attributes.png)
+![Radar Chart](https://github.com/professordnyc/goose-adventai/blob/main/day3/images/attributes.png)
