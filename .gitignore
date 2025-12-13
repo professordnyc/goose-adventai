@@ -33,3 +33,5 @@ build/
 
 # VS Code settings (optional, keep if you want to share workspace config)
 .vscode/
+# Local Netlify folder
+.netlify
