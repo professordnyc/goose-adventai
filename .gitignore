@@ -12,6 +12,9 @@ Desktop.ini
 # Goose hints (local-only, not for repo)
 .goosehints
 
+# Goose internal state (do not commit)
+state_backup.json
+
 # Logs
 *.log
 
