@@ -1,0 +1,152 @@
+name: Issue Triage
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    
+    steps:
+      - name: Triage Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = issue.title.toLowerCase();
+            const body = issue.body ? issue.body.toLowerCase() : '';
+            const text = title + ' ' + body;
+            
+            let categoryLabel = '';
+            let comment = '';
+            const labels = [];
+            
+            // Classification rules: bug > enhancement > question
+            // Bug detection
+            if (text.includes('error') || 
+                text.includes('exception') ||
+                text.includes('fails') ||
+                text.includes('failed') ||
+                text.includes('broken') ||
+                text.includes('not working') ||
+                text.includes('steps to reproduce') ||
+                text.includes('reproduce:') ||
+                text.includes('bug')) {
+              categoryLabel = 'bug';
+              comment = "Thanks for reporting this bug. We'll investigate and update this issue soon.";
+            }
+            // Enhancement detection
+            else if (text.includes('feature') ||
+                     text.includes('enhancement') ||
+                     text.includes('improvement') ||
+                     text.includes('add support') ||
+                     text.includes('proposal') ||
+                     text.includes('suggest') ||
+                     text.includes('could we') ||
+                     text.includes('would be nice')) {
+              categoryLabel = 'enhancement';
+              comment = "Thanks for the idea! We'll review this enhancement request.";
+            }
+            // Question detection
+            else if (text.includes('?') ||
+                     text.includes('how do i') ||
+                     text.includes('help') ||
+                     text.includes('clarify') ||
+                     text.includes('docs unclear') ||
+                     text.includes('where is') ||
+                     text.includes('what is')) {
+              categoryLabel = 'question';
+              comment = "Thanks for your question. We'll follow up with clarification.";
+            }
+            // Default to question
+            else {
+              categoryLabel = 'question';
+              comment = "Thanks for your question. We'll follow up with clarification.";
+            }
+            
+            labels.push(categoryLabel);
+            
+            // Priority detection
+            let priorityLabel = 'priority-low';
+            if (text.includes('urgent') ||
+                text.includes('critical') ||
+                text.includes('blocker') ||
+                text.includes('asap') ||
+                text.includes('immediately')) {
+              priorityLabel = 'priority-high';
+            } else if (text.includes('important') ||
+                       text.includes('soon') ||
+                       text.includes('needed')) {
+              priorityLabel = 'priority-medium';
+            }
+            labels.push(priorityLabel);
+            
+            // Sentiment detection
+            if (text.includes('frustrated') ||
+                text.includes('unacceptable') ||
+                text.includes('angry') ||
+                text.includes('disappointed') ||
+                text.includes('terrible') ||
+                text.includes('horrible')) {
+              labels.push('needs-attention');
+            }
+            
+            // Add all labels
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              labels: labels
+            });
+            
+            // Add comment
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: comment
+            });
+            
+            // High priority notification
+            if (priorityLabel === 'priority-high') {
+              const summaryComment = `🚨 **High Priority Issue Detected**\n\n` +
+                `**Category:** ${categoryLabel}\n` +
+                `**Title:** ${issue.title}\n` +
+                `This issue has been flagged for immediate attention.`;
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: summaryComment
+              });
+              
+              // Optional Slack notification (commented out by default)
+              // To enable Slack notifications:
+              // 1. Create a Slack webhook URL at https://api.slack.com/messaging/webhooks
+              // 2. Add it as a repository secret named SLACK_WEBHOOK_URL in Settings > Secrets and variables > Actions
+              // 3. Uncomment the step below
+            }
+      
+      # - name: Notify Slack on High Priority
+      #   if: steps.triage.outputs.priority == 'high'
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #   run: |
+      #     curl -X POST $SLACK_WEBHOOK_URL \
+      #       -H 'Content-Type: application/json' \
+      #       -d '{
+      #         "text": "🚨 High Priority Issue: ${{ github.event.issue.title }}",
+      #         "blocks": [
+      #           {
+      #             "type": "section",
+      #             "text": {
+      #               "type": "mrkdwn",
+      #               "text": "*High Priority Issue Opened*\n*Title:* ${{ github.event.issue.title }}\n*URL:* ${{ github.event.issue.html_url }}\n*Reporter:* ${{ github.event.issue.user.login }}"
+      #             }
+      #           }
+      #         ]
+      #       }'
