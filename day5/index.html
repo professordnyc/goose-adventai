@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gesture-controlled flight tracker for Winter Festival 2026 - Real-time arrivals to Atlanta KATL">
+    <title>❄️ Winter Festival - Flight Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Snowflakes (optional winter atmosphere) -->
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">❄️ Winter Festival Flight Tracker</div>
+            <nav class="nav">
+                <span class="gesture-help">👊 Navigate • ✋ Select</span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-display">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-compact">
+                <h1 class="section-title">✈️ Live Arrivals to Atlanta (KATL)</h1>
+                <p class="section-intro">Real-time flight tracking with gesture controls</p>
+            </section>
+
+            <!-- Flight List -->
+            <section class="flight-list" id="flight-list">
+                <!-- Flight cards will be dynamically generated here -->
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Loading flight data...</p>
+                </div>
+            </section>
+
+            <!-- Info Bar -->
+            <div class="info-bar" id="info-bar">
+                <span id="last-update">Last updated: --</span>
+                <span id="next-refresh">Next refresh: --</span>
+                <span id="cache-status">Cache: --</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Gesture Indicator (bottom-left) -->
+    <div id="gesture-indicator" class="gesture-indicator">
+        <div class="gesture-icon">👋</div>
+        <div class="gesture-name">Waiting for gesture...</div>
+        <div class="confidence-meter">
+            <div class="confidence-bar-container">
+                <div class="confidence-bar" style="width: 0%"></div>
+                <div class="confidence-threshold"></div>
+            </div>
+            <div class="confidence-value">0%</div>
+        </div>
+    </div>
+
+    <!-- Webcam Container (bottom-right) -->
+    <div id="webcam-container" class="webcam-container">
+        <video id="webcam" autoplay playsinline muted></video>
+        <canvas id="landmark-canvas"></canvas>
+        <button id="toggle-webcam" class="toggle-button" title="Toggle webcam preview">
+            👁️
+        </button>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>❄️ Winter Festival 2026</h3>
+                    <p>Gesture-controlled flight tracking experience for festival visitors</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Powered By</h3>
+                    <ul>
+                        <li>OpenSky Network - Real-time flight data</li>
+                        <li>Google MediaPipe - Gesture recognition</li>
+                        <li>Goose AI - Development assistant</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Controls</h3>
+                    <ul>
+                        <li>👊 Closed Fist - Navigate flights</li>
+                        <li>✋ Open Palm - Select flight</li>
+                        <li>👁️ Toggle webcam preview</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Winter Festival. Built with <a href="https://github.com/block/goose" target="_blank">Goose AI</a>.</p>
+                <p class="footer-tagline">Safe travels and happy holidays! ✈️❄️</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="main.js"></script>
+</body>
+</html>

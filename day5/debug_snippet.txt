@@ -1,0 +1,18 @@
+// Add after line 110 in gesture.js - for debugging
+let frameCount = 0;
+const detectFrame = () => {
+    if (!isDetecting) return;
+    
+    try {
+        const results = gestureRecognizer.recognizeForVideo(video, performance.now());
+        
+        // Debug every second
+        frameCount++;
+        if (frameCount % 60 === 0) {
+            console.log('Detection:', {
+                gestures: results.gestures?.length,
+                landmarks: results.landmarks?.length,
+                firstGesture: results.gestures?.[0]?.[0]?.categoryName,
+                confidence: results.gestures?.[0]?.[0]?.score
+            });
+        }
