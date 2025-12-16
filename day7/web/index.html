@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found Dashboard - Winter Festival</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎄 Winter Festival Lost & Found</h1>
+            <p class="subtitle">Day 2 - Peak Crowd Report</p>
+        </header>
+
+        <!-- Dashboard Summary -->
+        <section class="dashboard">
+            <div class="summary-card">
+                <div class="card-icon">📦</div>
+                <div class="card-content">
+                    <div class="card-value" id="total-items">0</div>
+                    <div class="card-label">Total Items</div>
+                </div>
+            </div>
+            <div class="summary-card urgent">
+                <div class="card-icon">⚠️</div>
+                <div class="card-content">
+                    <div class="card-value" id="urgent-items">0</div>
+                    <div class="card-label">Urgent Items</div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="card-icon">🧤</div>
+                <div class="card-content">
+                    <div class="card-value" id="pairs">0</div>
+                    <div class="card-label">Pairs Found</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Breakdown -->
+        <section class="category-breakdown">
+            <h2>Items by Category</h2>
+            <div id="category-chart" class="chart-container"></div>
+        </section>
+
+        <!-- Location Breakdown -->
+        <section class="location-breakdown">
+            <h2>Items by Location</h2>
+            <div id="location-chart" class="chart-container"></div>
+        </section>
+
+        <!-- Search and Filters -->
+        <section class="controls">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search items by description...">
+            </div>
+            <div class="filters">
+                <select id="category-filter">
+                    <option value="">All Categories</option>
+                </select>
+                <select id="location-filter">
+                    <option value="">All Locations</option>
+                </select>
+                <select id="urgency-filter">
+                    <option value="">All Items</option>
+                    <option value="urgent">Urgent Only</option>
+                    <option value="non-urgent">Non-Urgent Only</option>
+                </select>
+                <select id="pair-filter">
+                    <option value="">All Items</option>
+                    <option value="pairs">Pairs Only</option>
+                </select>
+            </div>
+            <div class="sort-options">
+                <label>Sort by:</label>
+                <select id="sort-select">
+                    <option value="id">ID</option>
+                    <option value="category">Category</option>
+                    <option value="location">Location</option>
+                    <option value="urgent">Urgency</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Inventory Table -->
+        <section class="inventory">
+            <h2>Item Inventory</h2>
+            <div class="table-container">
+                <table id="items-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="items-tbody">
+                        <!-- Items will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-footer">
+                <span id="showing-count">Showing 0 of 0 items</span>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

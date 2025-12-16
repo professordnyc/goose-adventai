@@ -1,0 +1,54 @@
+============================================================
+LOST & FOUND REPORT - Day 2 Peak Crowd
+============================================================
+
+Total Items: 34
+Urgent Items: 6
+Pairs: 2
+
+------------------------------------------------------------
+ITEMS BY CATEGORY
+------------------------------------------------------------
+Accessories         :  14
+Clothing            :   4
+Electronics         :   6
+Eyewear             :   4
+Jewelry             :   4
+Personal Items      :   2
+
+------------------------------------------------------------
+ITEMS BY LOCATION
+------------------------------------------------------------
+Fortune Teller Tent      :   6
+Hot Cocoa Stand          :   7
+Ice Skating Rink         :   7
+Parking Lot              :   7
+Storytelling Tent        :   7
+
+------------------------------------------------------------
+URGENT ITEMS
+------------------------------------------------------------
+[ID   1] silver macbook pro
+          Location: Hot Cocoa Stand
+          Category: Electronics
+
+[ID   2] Tesla key fob
+          Location: Parking Lot
+          Category: Electronics
+
+[ID   3] wedding ring, gold band
+          Location: Storytelling Tent
+          Category: Jewelry
+
+[ID   4] Gold wedding ring
+          Location: Storytelling Tent
+          Category: Jewelry
+
+[ID  17] stuffed animal, brown teddy bear
+          Location: Ice Skating Rink
+          Category: Personal Items
+
+[ID  19] camera, Canon DSLR, black
+          Location: Parking Lot
+          Category: Electronics
+

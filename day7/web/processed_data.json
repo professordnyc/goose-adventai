@@ -1,0 +1,349 @@
+{
+  "summary": {
+    "total_items": 26,
+    "categories": {
+      "Electronics": 5,
+      "Jewelry": 2,
+      "Accessories": 6,
+      "Eyewear": 3,
+      "Clothing": 9,
+      "Personal Items": 1
+    },
+    "locations": {
+      "Hot Cocoa Stand": 6,
+      "Parking Lot": 4,
+      "Storytelling Tent": 6,
+      "Ice Skating Rink": 5,
+      "Fortune Teller Tent": 5
+    },
+    "urgency_levels": {
+      "High": 2,
+      "Critical": 3,
+      "Low": 21
+    },
+    "pairs": 2
+  },
+  "items": [
+    {
+      "id": "LF001",
+      "description": "silver macbook pro",
+      "location": "Hot Cocoa Stand",
+      "category": "Electronics",
+      "urgency": "High",
+      "is_pair": false,
+      "raw_entries": [
+        "silver macbook pro, hot cocoa stand - URGENT\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF002",
+      "description": "Tesla key fob",
+      "location": "Parking Lot",
+      "category": "Electronics",
+      "urgency": "Critical",
+      "is_pair": false,
+      "raw_entries": [
+        "Tesla key fob, parking lot - URGENT!!!\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF003",
+      "description": "wedding ring, gold band",
+      "location": "Storytelling Tent",
+      "category": "Jewelry",
+      "urgency": "Critical",
+      "is_pair": false,
+      "raw_entries": [
+        "wedding ring, gold band, storytelling tent - VERY URGENT\n",
+        "Gold wedding ring, story tent - please help find owner!\n"
+      ],
+      "potential_matches": 1
+    },
+    {
+      "id": "LF004",
+      "description": "grey backpack, small, kids",
+      "location": "Hot Cocoa Stand",
+      "category": "Accessories",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "grey backpack, small, kids, hot cocoa stand\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF005",
+      "description": "child's gray backpack",
+      "location": "Hot Cocoa Stand",
+      "category": "Accessories",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "child's gray backpack, cocoa booth\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF006",
+      "description": "Ray Ban sunglasses, black frames",
+      "location": "Parking Lot",
+      "category": "Eyewear",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "sunglasses (Ray-Ban), black, parking lot\n",
+        "Ray Ban sunglasses, black frames, parking\n"
+      ],
+      "potential_matches": 1
+    },
+    {
+      "id": "LF007",
+      "description": "yellow scarf",
+      "location": "Ice Skating Rink",
+      "category": "Clothing",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "yellow scarf, ice rink\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF008",
+      "description": "red scarf with white stripes",
+      "location": "Fortune Teller Tent",
+      "category": "Clothing",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "red scarf with white stripes, fortune teller\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF009",
+      "description": "Red striped scarf",
+      "location": "Fortune Teller Tent",
+      "category": "Clothing",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "Red striped scarf, fortune tent\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF010",
+      "description": "blue mittens pair",
+      "location": "Ice Skating Rink",
+      "category": "Clothing",
+      "urgency": "Low",
+      "is_pair": true,
+      "raw_entries": [
+        "blue mittens (pair), ice rink\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF011",
+      "description": "phone charger iPhone lightning",
+      "location": "Storytelling Tent",
+      "category": "Electronics",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "phone charger (iPhone lightning), storytelling tent\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF012",
+      "description": "iphone charger cable",
+      "location": "Storytelling Tent",
+      "category": "Electronics",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "iphone charger cable, story tent\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF013",
+      "description": "Blue water bottle stainless steel",
+      "location": "Hot Cocoa Stand",
+      "category": "Accessories",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "water bottle, blue metal, hot cocoa stand\n",
+        "Blue water bottle (stainless steel), cocoa booth\n"
+      ],
+      "potential_matches": 1
+    },
+    {
+      "id": "LF014",
+      "description": "stuffed animal, brown teddy bear",
+      "location": "Ice Skating Rink",
+      "category": "Personal Items",
+      "urgency": "Critical",
+      "is_pair": false,
+      "raw_entries": [
+        "stuffed animal, brown teddy bear, ice rink - kid crying!\n",
+        "TEDDY BEAR brown, ice skating - child lost it\n"
+      ],
+      "potential_matches": 1
+    },
+    {
+      "id": "LF015",
+      "description": "camera, Canon DSLR, black",
+      "location": "Parking Lot",
+      "category": "Electronics",
+      "urgency": "High",
+      "is_pair": false,
+      "raw_entries": [
+        "camera, Canon DSLR, black, parking lot - URGENT\n",
+        "Black Canon camera, parking area\n"
+      ],
+      "potential_matches": 1
+    },
+    {
+      "id": "LF016",
+      "description": "white knit hat with pom pom",
+      "location": "Fortune Teller Tent",
+      "category": "Clothing",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "white knit hat with pom pom, fortune teller\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF017",
+      "description": "White pompom beanie",
+      "location": "Fortune Teller Tent",
+      "category": "Clothing",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "White pompom beanie, fortune tent\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF018",
+      "description": "green gloves pair",
+      "location": "Storytelling Tent",
+      "category": "Clothing",
+      "urgency": "Low",
+      "is_pair": true,
+      "raw_entries": [
+        "green gloves (pair), storytelling tent\n",
+        "Green gloves (both), story area\n"
+      ],
+      "potential_matches": 1
+    },
+    {
+      "id": "LF019",
+      "description": "umbrella, black",
+      "location": "Parking Lot",
+      "category": "Accessories",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "umbrella, black, parking lot\n",
+        "Black umbrella, parking\n"
+      ],
+      "potential_matches": 1
+    },
+    {
+      "id": "LF020",
+      "description": "pink backpack, large",
+      "location": "Ice Skating Rink",
+      "category": "Accessories",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "pink backpack, large, ice rink\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF021",
+      "description": "prescription glasses, black frames",
+      "location": "Hot Cocoa Stand",
+      "category": "Eyewear",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "prescription glasses, black frames, hot cocoa stand\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF022",
+      "description": "Black eyeglasses",
+      "location": "Hot Cocoa Stand",
+      "category": "Eyewear",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "Black eyeglasses, cocoa booth\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF023",
+      "description": "Silver bracelet chain style",
+      "location": "Ice Skating Rink",
+      "category": "Jewelry",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "silver bracelet, ice rink\n",
+        "Silver bracelet (chain style), skating area\n"
+      ],
+      "potential_matches": 1
+    },
+    {
+      "id": "LF024",
+      "description": "red wallet, womens",
+      "location": "Fortune Teller Tent",
+      "category": "Accessories",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "red wallet, womens, fortune teller\n",
+        "Red wallet (female), fortune tent\n"
+      ],
+      "potential_matches": 1
+    },
+    {
+      "id": "LF025",
+      "description": "blue jacket, kids size",
+      "location": "Storytelling Tent",
+      "category": "Clothing",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "blue jacket, kids size, storytelling tent\n"
+      ],
+      "potential_matches": 0
+    },
+    {
+      "id": "LF026",
+      "description": "Child's blue coat",
+      "location": "Storytelling Tent",
+      "category": "Clothing",
+      "urgency": "Low",
+      "is_pair": false,
+      "raw_entries": [
+        "Child's blue coat, story area\n"
+      ],
+      "potential_matches": 0
+    }
+  ]
+}

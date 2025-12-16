@@ -1,0 +1,18 @@
+package: "day7-lost-found"
+
+title: "Festival Lost & Found Processor"
+description: "Processes Day 2 peak crowd data: deduplicates entries, categorizes items, flags urgent cases, and generates both JSON data and an interactive web dashboard."
+
+prompt: |
+  You are a Goose recipe specialist. Process the file data/day2_peak_crowd.txt.
+
+  Steps:
+  - Normalize locations (e.g., "cocoa booth" → "Hot Cocoa Stand").
+  - Deduplicate items by description + location similarity.
+  - Flag urgent items (keywords: URGENT, crying, passport, medical).
+  - Categorize items into Electronics, Accessories, Jewelry, Clothing, Eyewear, Personal Items, Other.
+  - Identify pairs (gloves, mittens, etc.).
+  - Output JSON to output/processed_data.json with a summary and items list.
+  - Write a text report to output/report.txt with counts by category, location, urgency.
+  - Generate a web app in web/ (index.html, style.css, app.js) that loads processed_data.json,
+    shows a dashboard summary, searchable/sortable inventory, and highlights urgent items.
