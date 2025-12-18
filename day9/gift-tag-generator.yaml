@@ -1,0 +1,138 @@
+name: gift-tag-generator
+title: Gift Tag Generator
+description: Generate adaptive, print-ready HTML gift tags with dynamic layout, styling, content, poem, and QR code.
+
+parameters:
+  - key: recipient_name
+    input_type: string
+    requirement: required
+    description: Name of the gift recipient
+
+  - key: gift_description
+    input_type: string
+    requirement: required
+    description: Description of the gift (e.g., "Handmade scarf")
+
+  - key: sender_name
+    input_type: string
+    requirement: required
+    description: Name of the gift sender
+
+  - key: tag_style
+    input_type: select
+    requirement: required
+    enum: [elegant, playful, minimalist, festive]
+    description: Tag styling theme
+
+  - key: include_poem
+    input_type: boolean
+    requirement: required
+    description: Whether to include a personalized poem
+
+  - key: qr_message_url
+    input_type: string
+    requirement: optional
+    default: ""
+    description: Embed a working QR code if provided (leave empty to skip)
+
+  - key: gift_size
+    input_type: select
+    requirement: required
+    enum: [small, medium, large]
+    description: Tag dimensions - small (3.5"×2"), medium (4"×2.5"), large (5"×3")
+
+  - key: favorite_color
+    input_type: string
+    requirement: optional
+    default: "blue"
+    description: Recipient's preferred color for accent
+
+  - key: language
+    input_type: select
+    requirement: optional
+    enum: [English, Spanish, French]
+    default: English
+    description: Language for greeting and poem
+
+  - key: tone
+    input_type: select
+    requirement: optional
+    enum: [formal, casual, humorous, heartfelt]
+    default: heartfelt
+    description: Tone of the greeting/poem
+
+prompt: |
+  IMMEDIATELY generate a gift tag HTML file using the text_editor tool. Do not wait for further input.
+  
+  PARAMETERS PROVIDED:
+  - Recipient: {{ recipient_name }}
+  - Gift: {{ gift_description }}
+  - From: {{ sender_name }}
+  - Style: {{ tag_style }}
+  - Include Poem: {{ include_poem }}
+  - QR URL: {{ qr_message_url }}
+  - Size: {{ gift_size }}
+  - Color: {{ favorite_color }}
+  - Language: {{ language }}
+  - Tone: {{ tone }}
+  
+  DESIGN RULES BY STYLE:
+  
+  ELEGANT:
+  - Font: Georgia, serif
+  - Colors: Muted elegance (navy #1a237e, cream #f8f8fc)
+  - Border: Thin (2px), refined
+  - Elements: Subtle shadows, ornamental lines
+  
+  PLAYFUL:
+  - Font: 'Comic Sans MS', rounded sans
+  - Colors: Bright, cheerful (pink #ff69b4, yellow #ffd700, turquoise #40e0d0)
+  - Border: Thick (4px), rounded corners
+  - Elements: Emojis, fun decorations
+  
+  MINIMALIST:
+  - Font: Helvetica, Arial, sans-serif
+  - Colors: Neutral (white #ffffff, gray #555, black #000)
+  - Border: Thin (1px), simple
+  - Elements: Clean lines, lots of whitespace
+  
+  FESTIVE:
+  - Font: 'Arial Black', Impact, bold sans
+  - Colors: Vibrant festive (red #cc0000, green #2d5016, gold #d4af37)
+  - Border: Bold (4px), decorative
+  - Elements: Holiday emojis (🎄❄️🎁), seasonal patterns
+  
+  MULTILINGUAL GREETINGS:
+  - English: "A Gift For You" | To: | From:
+  - Spanish: "Un Regalo Para Ti" | Para: | De:
+  - French: "Un Cadeau Pour Vous" | Pour: | De:
+  
+  DIMENSIONS BY SIZE:
+  - small: width: 3.5in; height: 2in;
+  - medium: width: 4in; height: 2.5in;
+  - large: width: 5in; height: 3in;
+  
+  POEM REQUIREMENTS (if include_poem is true):
+  - 3-5 lines
+  - Reference {{ gift_description }} and {{ recipient_name }}
+  - Match {{ tag_style }} aesthetic
+  - Use {{ language }}
+  - Reflect {{ tone }}
+  
+  QR CODE (if qr_message_url provided and not empty):
+  - Use: <img src="https://api.qrserver.com/v1/create-qr-code/?size=112x112&data={{ qr_message_url }}" alt="QR Code">
+  - Position: bottom-right corner, absolute positioning
+  
+  CRITICAL EXECUTION STEPS:
+  1. IMMEDIATELY use text_editor tool with command="write"
+  2. Create complete HTML5 document with DOCTYPE, html, head, body
+  3. Use <style> tag for all CSS (no external stylesheets)
+  4. Apply design rules based on {{ tag_style }}
+  5. Use {{ favorite_color }} as accent color in borders or backgrounds
+  6. Save to: C:/Users/profe/Documents/projects/goose-adventai/day9/output/gift-tag-{{ recipient_name | replace(" ", "-") | lower }}.html
+  7. Include @media print CSS for optimal printing
+  8. Ensure minimum 12pt font size for readability
+  9. After saving, verify file exists using shell tool
+  10. Report: "Gift tag created and saved to: [full file path]"
+  
+  BEGIN GENERATION NOW - DO NOT ASK FOR CONFIRMATION OR ADDITIONAL INPUT.

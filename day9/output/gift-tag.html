@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Tag - Sarah Chen</title>
+    <style>
+        @media print {
+            body { margin: 0; padding: 0; }
+            .gift-tag { box-shadow: none; }
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .gift-tag {
+            width: 4in;
+            height: 2.5in;
+            background: linear-gradient(135deg, #ffffff 0%, #fff9f9 100%);
+            border: 4px solid #cc0000;
+            border-radius: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            font-family: 'Arial Black', Impact, Arial, sans-serif;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .decoration {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 28pt;
+            line-height: 1;
+        }
+        .header {
+            color: #cc0000;
+            font-size: 22pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin: 6px 0;
+            font-size: 13pt;
+            color: #333;
+        }
+        .label {
+            font-weight: bold;
+            color: #b30000;
+            display: inline-block;
+            min-width: 60px;
+        }
+        .value {
+            color: #000;
+        }
+        .poem {
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 10pt;
+            line-height: 1.4;
+            margin-top: 12px;
+            padding: 10px;
+            background: rgba(255, 0, 0, 0.05);
+            border-left: 4px solid #cc0000;
+            border-radius: 4px;
+            color: #444;
+        }
+        .footer {
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            font-size: 24pt;
+        }
+    </style>
+</head>
+<body>
+    <div class="gift-tag">
+        <div class="decoration">🎄</div>
+        <div class="header">A Gift For You</div>
+        <div class="section">
+            <span class="label">To:</span>
+            <span class="value">Sarah Chen</span>
+        </div>
+        <div class="section">
+            <span class="label">From:</span>
+            <span class="value">Festival Committee</span>
+        </div>
+        <div class="section">
+            <span class="label">Gift:</span>
+            <span class="value">Handmade scarf</span>
+        </div>
+        <div class="poem">
+            Warmth woven with loving care,<br>
+            For Sarah, precious and so fair,<br>
+            May this scarf embrace you tight,<br>
+            Through winter's chill and starlit night.
+        </div>
+        <div class="footer">❄️</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Étiquette Cadeau - Emma Thompson</title>
+    <style>
+        @media print {
+            body { margin: 0; padding: 0; }
+            .gift-tag { box-shadow: none; }
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #e0e0e0;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        .gift-tag {
+            width: 3.5in;
+            height: 2in;
+            background: #ffffff;
+            border: 1px solid #d4af37;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        .header {
+            color: #333;
+            font-size: 14pt;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .section {
+            margin: 5px 0;
+            font-size: 11pt;
+            color: #555;
+            font-weight: 300;
+        }
+        .label {
+            color: #d4af37;
+            display: inline-block;
+            min-width: 50px;
+        }
+        .value {
+            color: #000;
+        }
+        .poem {
+            font-size: 9pt;
+            line-height: 1.4;
+            margin-top: 10px;
+            padding: 8px;
+            color: #666;
+            font-style: italic;
+        }
+        .qr-code {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 112px;
+            height: 112px;
+        }
+        .accent {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 30px;
+            height: 1px;
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body>
+    <div class="gift-tag">
+        <div class="accent"></div>
+        <div class="header">UN CADEAU POUR VOUS</div>
+        <div class="section">
+            <span class="label">Pour:</span>
+            <span class="value">Emma Thompson</span>
+        </div>
+        <div class="section">
+            <span class="label">De:</span>
+            <span class="value">Mayor's Office</span>
+        </div>
+        <div class="section">
+            <span class="label">Cadeau:</span>
+            <span class="value">Artisan chocolate collection</span>
+        </div>
+        <div class="poem">
+            Chocolat artisanal, doux et raffiné,<br>
+            Pour Emma, avec notre amitié,<br>
+            Que chaque bouchée apporte joie,<br>
+            Dans votre cœur, toujours de la soie.
+        </div>
+        <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=112x112&data=https://example.com/special-message" alt="QR Code">
+    </div>
+</body>
+</html>

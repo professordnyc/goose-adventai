@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Tag for Emma McDowell</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial Black', Impact, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .gift-tag {
+            width: 4in;
+            height: 2.5in;
+            background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+            border: 4px solid #cc0000;
+            border-radius: 12px;
+            padding: 16px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .gift-tag::before {
+            content: '🎄';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            font-size: 24px;
+            opacity: 0.3;
+        }
+
+        .gift-tag::after {
+            content: '❄️';
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            font-size: 24px;
+            opacity: 0.3;
+        }
+
+        .header {
+            text-align: center;
+            color: #2d5016;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .decoration-line {
+            height: 3px;
+            background: linear-gradient(to right, #cc0000, #d4af37, #2d5016);
+            margin: 8px 0;
+            border-radius: 2px;
+        }
+
+        .recipient {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .recipient-label {
+            color: #cc0000;
+            font-weight: bold;
+        }
+
+        .recipient-name {
+            color: #2d5016;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .gift-description {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .poem {
+            font-family: Georgia, serif;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #444;
+            margin: 10px 0;
+            padding: 8px;
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid #d4af37;
+            border-radius: 4px;
+        }
+
+        .from {
+            font-size: 13px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .from-label {
+            color: #cc0000;
+            font-weight: bold;
+        }
+
+        .from-name {
+            color: #2d5016;
+            font-weight: bold;
+        }
+
+        .qr-code {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 56px;
+            height: 56px;
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #d4af37;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .holiday-emoji {
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+                margin: 0;
+            }
+
+            .gift-tag {
+                box-shadow: none;
+                page-break-after: always;
+                margin: 0.25in;
+            }
+
+            @page {
+                size: 4.5in 3in;
+                margin: 0.25in;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gift-tag">
+        <div class="header">
+            🎁 A Gift For You 🎁
+        </div>
+        
+        <div class="decoration-line"></div>
+        
+        <div class="recipient">
+            <span class="recipient-label">To:</span> 
+            <span class="recipient-name">Emma McDowell</span>
+        </div>
+        
+        <div class="gift-description">
+            🎄 Christmas tree ornament
+        </div>
+        
+        <div class="poem">
+            For Emma, a treasure to hang with care,<br>
+            Upon your Christmas tree so bright and fair.<br>
+            An ornament to shimmer, gleam, and glow,<br>
+            A heartfelt gift wrapped up in festive bow.<br>
+            May joy and wonder fill your holiday cheer! ❄️
+        </div>
+        
+        <div class="from">
+            <span class="from-label">From:</span> 
+            <span class="from-name">Eugene Cable</span>
+        </div>
+        
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=112x112&data={{ qr_message_url }}" alt="QR Code">
+        </div>
+    </div>
+</body>
+</html>

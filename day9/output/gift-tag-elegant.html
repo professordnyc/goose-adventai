@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etiqueta de Regalo - Marcus Rodriguez</title>
+    <style>
+        @media print {
+            body { margin: 0; padding: 0; }
+            .gift-tag { box-shadow: none; }
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            font-family: Georgia, serif;
+        }
+        .gift-tag {
+            width: 4in;
+            height: 2.5in;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f8fc 100%);
+            border: 2px solid #1a237e;
+            padding: 18px;
+            box-sizing: border-box;
+            position: relative;
+            font-family: Georgia, 'Times New Roman', serif;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+        }
+        .ornament {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, #1a237e, #3f51b5, #1a237e);
+        }
+        .header {
+            color: #1a237e;
+            font-size: 18pt;
+            font-weight: normal;
+            text-align: center;
+            margin-top: 8px;
+            margin-bottom: 14px;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        .section {
+            margin: 8px 0;
+            font-size: 12pt;
+            color: #222;
+        }
+        .label {
+            font-weight: bold;
+            color: #1a237e;
+            display: inline-block;
+            min-width: 55px;
+        }
+        .value {
+            color: #000;
+        }
+        .poem {
+            font-size: 10pt;
+            line-height: 1.5;
+            margin-top: 12px;
+            padding: 10px 12px;
+            background: rgba(26, 35, 126, 0.03);
+            border: 1px solid #d0d0e0;
+            font-style: italic;
+            color: #333;
+        }
+        .qr-code {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 112px;
+            height: 112px;
+        }
+    </style>
+</head>
+<body>
+    <div class="gift-tag">
+        <div class="ornament"></div>
+        <div class="header">Un Regalo Para Ti</div>
+        <div class="section">
+            <span class="label">Para:</span>
+            <span class="value">Marcus Rodriguez</span>
+        </div>
+        <div class="section">
+            <span class="label">De:</span>
+            <span class="value">Winter Festival Team</span>
+        </div>
+        <div class="section">
+            <span class="label">Regalo:</span>
+            <span class="value">Professional microphone</span>
+        </div>
+        <div class="poem">
+            Con profundo respeto y gratitud sincera,<br>
+            Este micrófono para tu voz verdadera,<br>
+            Que tu arte siga brillando con honor,<br>
+            Marcus, eres nuestra inspiración mayor.
+        </div>
+        <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=112x112&data=https://example.com/thank-you-marcus" alt="QR Code">
+    </div>
+</body>
+</html>
