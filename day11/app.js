@@ -1,13 +1,14 @@
 // Fun House Photo Booth - Core App with Filters
 // Camera access, face detection, filters, capture, and download functionality
+// Mobile-optimized for iOS Safari and DuckDuckGo
 
 class PhotoBoothApp {
     constructor() {
         this.video = document.getElementById('video');
         this.canvas = document.getElementById('canvas');
         this.capturedCanvas = document.getElementById('captured-canvas');
-        this.ctx = this.canvas.getContext('2d');
-        this.capturedCtx = this.capturedCanvas.getContext('2d');
+        this.ctx = this.canvas.getContext('2d', { willReadFrequently: false });
+        this.capturedCtx = this.capturedCanvas.getContext('2d', { willReadFrequently: false });
         this.captureBtn = document.getElementById('capture-btn');
         this.downloadBtn = document.getElementById('download-btn');
         this.errorMessage = document.getElementById('error-message');
@@ -16,6 +17,7 @@ class PhotoBoothApp {
         
         this.currentFilter = 'none';
         this.capturedImage = null;
+        this.capturedImageData = null;
         this.stream = null;
         this.faceDetection = null;
         this.detectedFaces = [];
@@ -24,11 +26,23 @@ class PhotoBoothApp {
         // Sparkle filter properties
         this.sparkles = [];
         this.sparkleCount = 20;
+        
+        // Mobile/browser detection
+        this.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        this.isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
         this.init();
     }
 
     async init() {
+        console.log('Browser detection:', {
+            isSafari: this.isSafari,
+            isIOS: this.isIOS,
+            isMobile: this.isMobile,
+            userAgent: navigator.userAgent
+        });
+        
         await this.setupCamera();
         this.setupCanvas();
         this.setupEventListeners();
@@ -38,23 +52,36 @@ class PhotoBoothApp {
 
     async setupCamera() {
         try {
-            this.stream = await navigator.mediaDevices.getUserMedia({
+            // More compatible constraints for mobile browsers
+            const constraints = {
                 video: { 
                     facingMode: 'user',
-                    width: { ideal: 1280 },
-                    height: { ideal: 720 }
+                    width: { ideal: 1280, max: 1920 },
+                    height: { ideal: 720, max: 1080 }
                 },
                 audio: false
-            });
+            };
+            
+            this.stream = await navigator.mediaDevices.getUserMedia(constraints);
             
             this.video.srcObject = this.stream;
+            this.video.setAttribute('playsinline', '');
+            this.video.setAttribute('autoplay', '');
+            this.video.setAttribute('muted', '');
             
-            // Wait for video to be ready
-            await new Promise((resolve) => {
-                this.video.onloadedmetadata = () => {
-                    resolve();
-                };
-            });
+            // Explicitly play for iOS Safari
+            await this.video.play();
+            
+            // Wait for video to be ready with timeout
+            await Promise.race([
+                new Promise((resolve) => {
+                    this.video.onloadedmetadata = () => {
+                        console.log('Video loaded:', this.video.videoWidth, 'x', this.video.videoHeight);
+                        resolve();
+                    };
+                }),
+                new Promise((_, reject) => setTimeout(() => reject('Video load timeout'), 10000))
+            ]);
             
             this.hideError();
         } catch (error) {
@@ -66,18 +93,31 @@ class PhotoBoothApp {
     setupCanvas() {
         // Set canvas size to match video
         const updateCanvasSize = () => {
-            this.canvas.width = this.video.videoWidth;
-            this.canvas.height = this.video.videoHeight;
-            this.capturedCanvas.width = this.video.videoWidth;
-            this.capturedCanvas.height = this.video.videoHeight;
+            if (this.video.videoWidth > 0 && this.video.videoHeight > 0) {
+                this.canvas.width = this.video.videoWidth;
+                this.canvas.height = this.video.videoHeight;
+                this.capturedCanvas.width = this.video.videoWidth;
+                this.capturedCanvas.height = this.video.videoHeight;
+                console.log('Canvas size updated:', this.canvas.width, 'x', this.canvas.height);
+            }
         };
 
         this.video.addEventListener('loadedmetadata', updateCanvasSize);
+        this.video.addEventListener('canplay', updateCanvasSize);
         window.addEventListener('resize', updateCanvasSize);
+        
+        // Initial size update
+        setTimeout(updateCanvasSize, 500);
     }
 
     async setupFaceDetection() {
         try {
+            // Check if FaceDetection is available
+            if (typeof FaceDetection === 'undefined') {
+                console.warn('FaceDetection library not loaded, filters may not work optimally');
+                return;
+            }
+            
             this.faceDetection = new FaceDetection({
                 locateFile: (file) => {
                     return `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`;
@@ -484,30 +524,52 @@ class PhotoBoothApp {
     }
 
     capturePhoto() {
-        // Capture current canvas state
-        this.capturedImage = this.canvas.toDataURL('image/png');
-        
-        // Draw the captured image to the captured canvas
-        const img = new Image();
-        img.onload = () => {
-            this.capturedCtx.drawImage(img, 0, 0, this.capturedCanvas.width, this.capturedCanvas.height);
-            this.noPhotoMessage.style.display = 'none';
-        };
-        img.src = this.capturedImage;
-        
-        // Enable download button
-        this.downloadBtn.disabled = false;
-        
-        // Visual feedback - flash effect on live canvas
-        this.canvas.classList.add('flash');
-        setTimeout(() => {
-            this.canvas.classList.remove('flash');
-        }, 500);
-        
-        // Show success toast
-        this.showToast('📸 Photo captured successfully!', 'success');
-        
-        console.log('Photo captured!');
+        try {
+            console.log('Capturing photo...');
+            
+            // Method 1: Direct canvas-to-canvas copy (best for Safari iOS)
+            // This bypasses the image element entirely
+            this.capturedCtx.drawImage(this.canvas, 0, 0, this.capturedCanvas.width, this.capturedCanvas.height);
+            
+            // Store as data URL for download
+            try {
+                this.capturedImage = this.capturedCanvas.toDataURL('image/png');
+                console.log('Captured image data URL length:', this.capturedImage.length);
+            } catch (error) {
+                console.error('toDataURL error:', error);
+                // Fallback: try with lower quality JPEG
+                this.capturedImage = this.capturedCanvas.toDataURL('image/jpeg', 0.9);
+            }
+            
+            // Hide the "no photo" message
+            if (this.noPhotoMessage) {
+                this.noPhotoMessage.style.display = 'none';
+            }
+            
+            // Force a repaint on iOS Safari
+            if (this.isIOS || this.isSafari) {
+                this.capturedCanvas.style.display = 'none';
+                void this.capturedCanvas.offsetHeight; // Force reflow
+                this.capturedCanvas.style.display = 'block';
+            }
+            
+            // Enable download button
+            this.downloadBtn.disabled = false;
+            
+            // Visual feedback - flash effect on live canvas
+            this.canvas.classList.add('flash');
+            setTimeout(() => {
+                this.canvas.classList.remove('flash');
+            }, 500);
+            
+            // Show success toast
+            this.showToast('📸 Photo captured successfully!', 'success');
+            
+            console.log('Photo captured successfully!');
+        } catch (error) {
+            console.error('Capture error:', error);
+            this.showToast('❌ Failed to capture photo. Please try again.', 'warning');
+        }
     }
 
     downloadPhoto() {
@@ -516,24 +578,34 @@ class PhotoBoothApp {
             return;
         }
 
-        // Create download link
-        const link = document.createElement('a');
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        link.download = `fun-house-photo-${timestamp}.png`;
-        link.href = this.capturedImage;
-        
-        // Trigger download
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        // Show success toast
-        this.showToast('💾 Photo downloaded successfully!', 'success');
-        
-        console.log('Photo downloaded!');
+        try {
+            // Create download link
+            const link = document.createElement('a');
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            link.download = `fun-house-photo-${timestamp}.png`;
+            link.href = this.capturedImage;
+            
+            // For mobile browsers, especially iOS Safari and DuckDuckGo
+            link.setAttribute('target', '_blank');
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show success toast
+            this.showToast('💾 Photo downloaded successfully!', 'success');
+            
+            console.log('Photo downloaded!');
+        } catch (error) {
+            console.error('Download error:', error);
+            this.showToast('❌ Download failed. Please try again.', 'warning');
+        }
     }
 
     showToast(message, type = 'info') {
+        if (!this.toast) return;
+        
         this.toast.textContent = message;
         this.toast.className = 'toast show ' + type;
         
@@ -543,16 +615,19 @@ class PhotoBoothApp {
     }
 
     showError(message) {
+        if (!this.errorMessage) return;
         this.errorMessage.textContent = message;
         this.errorMessage.style.display = 'block';
     }
 
     hideError() {
+        if (!this.errorMessage) return;
         this.errorMessage.style.display = 'none';
     }
 }
 
 // Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing app...');
     window.photoBoothApp = new PhotoBoothApp();
 });
