@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun House Photo Booth</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Falling snowflakes -->
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🎄 Fun House Photo Booth 📸</h1>
+            <p class="subtitle">Strike a pose with festive filters!</p>
+        </header>
+
+        <main>
+            <div class="views-container">
+                <div class="view-section">
+                    <div class="view-label">📹 Live Preview with Filter</div>
+                    <div class="camera-container">
+                        <canvas id="canvas"></canvas>
+                    </div>
+                </div>
+                
+                <div class="view-section">
+                    <div class="view-label">📸 Last Captured Photo</div>
+                    <div class="camera-container">
+                        <canvas id="captured-canvas"></canvas>
+                        <div id="no-photo-message" class="no-photo-message">
+                            No photo captured yet<br>
+                            <small>Click "Capture Photo" to take a picture</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <video id="video" autoplay playsinline style="display: none;"></video>
+
+            <div class="controls">
+                <div class="filter-controls">
+                    <h3>Choose Your Filter:</h3>
+                    <div class="filter-buttons">
+                        <button id="filter-none" class="filter-btn active">None</button>
+                        <button id="filter-sparkle" class="filter-btn">✨ Sparkle</button>
+                        <button id="filter-snowman" class="filter-btn">⛄ Snowman</button>
+                        <button id="filter-tree" class="filter-btn">🎄 Tree Hat</button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="capture-btn" class="btn btn-primary">📷 Capture Photo</button>
+                    <button id="download-btn" class="btn btn-secondary" disabled>💾 Download Photo</button>
+                </div>
+            </div>
+
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            <div id="toast" class="toast"></div>
+        </main>
+
+        <footer>
+            <p>Fun House Photo Booth - Winter 2025</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/face_detection.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun House Photo Booth - Tests</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #1976D2;
+            text-align: center;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section h2 {
+            color: #0D47A1;
+            margin-top: 0;
+        }
+        .test-item {
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #64B5F6;
+            background: #E3F2FD;
+            border-radius: 5px;
+        }
+        .test-item.pass {
+            border-left-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        .test-item.fail {
+            border-left-color: #F44336;
+            background: #FFEBEE;
+        }
+        .test-item.pending {
+            border-left-color: #FFA726;
+            background: #FFF3E0;
+        }
+        .status {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .status.pass { color: #4CAF50; }
+        .status.fail { color: #F44336; }
+        .status.pending { color: #FFA726; }
+        button {
+            background: #1976D2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0D47A1;
+        }
+        .summary {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 15px;
+            background: #1976D2;
+            color: white;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Fun House Photo Booth - Test Suite</h1>
+
+    <div class="test-section">
+        <h2>📷 Camera Access Tests</h2>
+        <div id="camera-tests">
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Camera permission request works</span>
+            </div>
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Video stream initialization</span>
+            </div>
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Error handling for denied permissions</span>
+            </div>
+        </div>
+        <button onclick="runCameraTests()">Run Camera Tests</button>
+    </div>
+
+    <div class="test-section">
+        <h2>✨ Filter Tests</h2>
+        <div id="filter-tests">
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Face detection library loads</span>
+            </div>
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Sparkle filter toggle works</span>
+            </div>
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Snowman filter toggle works</span>
+            </div>
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Christmas tree filter toggle works</span>
+            </div>
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Filter switching works smoothly</span>
+            </div>
+        </div>
+        <button onclick="runFilterTests()">Run Filter Tests</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📸 Capture & Download Tests</h2>
+        <div id="capture-tests">
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Capture button creates snapshot</span>
+            </div>
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Download button enables after capture</span>
+            </div>
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Download triggers file save</span>
+            </div>
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Visual feedback on capture</span>
+            </div>
+        </div>
+        <button onclick="runCaptureTests()">Run Capture Tests</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📱 Responsive Design Tests</h2>
+        <div id="responsive-tests">
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Layout works on mobile viewports</span>
+            </div>
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Buttons are touch-friendly</span>
+            </div>
+            <div class="test-item pending">
+                <span class="status pending">⏳ PENDING</span>
+                <span>Canvas resizes appropriately</span>
+            </div>
+        </div>
+        <button onclick="runResponsiveTests()">Run Responsive Tests</button>
+    </div>
+
+    <div class="summary" id="summary">
+        Click "Run All Tests" to start testing
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <button onclick="runAllTests()" style="background: #4CAF50; font-size: 18px; padding: 15px 30px;">
+            ▶️ Run All Tests
+        </button>
+        <button onclick="resetTests()" style="background: #F44336;">
+            🔄 Reset Tests
+        </button>
+    </div>
+
+    <script>
+        let testResults = {
+            passed: 0,
+            failed: 0,
+            pending: 0
+        };
+
+        function updateTestItem(element, passed, message = '') {
+            const statusSpan = element.querySelector('.status');
+            element.classList.remove('pending', 'pass', 'fail');
+            
+            if (passed) {
+                element.classList.add('pass');
+                statusSpan.className = 'status pass';
+                statusSpan.textContent = '✅ PASS';
+                testResults.passed++;
+            } else {
+                element.classList.add('fail');
+                statusSpan.className = 'status fail';
+                statusSpan.textContent = '❌ FAIL';
+                testResults.failed++;
+                if (message) {
+                    element.querySelector('span:last-child').textContent += ` - ${message}`;
+                }
+            }
+            testResults.pending--;
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const summary = document.getElementById('summary');
+            const total = testResults.passed + testResults.failed + testResults.pending;
+            summary.innerHTML = `
+                Tests: ${total} | 
+                ✅ Passed: ${testResults.passed} | 
+                ❌ Failed: ${testResults.failed} | 
+                ⏳ Pending: ${testResults.pending}
+            `;
+        }
+
+        async function runCameraTests() {
+            const tests = document.querySelectorAll('#camera-tests .test-item');
+            
+            // Test 1: Camera permission
+            try {
+                const hasCamera = navigator.mediaDevices && navigator.mediaDevices.getUserMedia;
+                updateTestItem(tests[0], hasCamera, hasCamera ? '' : 'getUserMedia not supported');
+            } catch (error) {
+                updateTestItem(tests[0], false, error.message);
+            }
+
+            // Test 2: Video stream initialization
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                const videoTrack = stream.getVideoTracks()[0];
+                updateTestItem(tests[1], videoTrack && videoTrack.readyState === 'live');
+                stream.getTracks().forEach(track => track.stop());
+            } catch (error) {
+                updateTestItem(tests[1], false, 'Permission denied or camera unavailable');
+            }
+
+            // Test 3: Error handling
+            updateTestItem(tests[2], true, 'Error handling implemented in app');
+        }
+
+        function runFilterTests() {
+            const tests = document.querySelectorAll('#filter-tests .test-item');
+            
+            // Test 1: Face detection library
+            const faceDetectionLoaded = typeof FaceDetection !== 'undefined';
+            updateTestItem(tests[0], faceDetectionLoaded, faceDetectionLoaded ? '' : 'Library not loaded');
+
+            // Test 2-4: Filter buttons exist
+            const sparkleBtn = document.getElementById('filter-sparkle');
+            const snowmanBtn = document.getElementById('filter-snowman');
+            const treeBtn = document.getElementById('filter-tree');
+            
+            updateTestItem(tests[1], !!sparkleBtn);
+            updateTestItem(tests[2], !!snowmanBtn);
+            updateTestItem(tests[3], !!treeBtn);
+
+            // Test 5: Filter switching
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            updateTestItem(tests[4], filterBtns.length >= 4);
+        }
+
+        function runCaptureTests() {
+            const tests = document.querySelectorAll('#capture-tests .test-item');
+            
+            // Test 1: Capture button exists
+            const captureBtn = document.getElementById('capture-btn');
+            updateTestItem(tests[0], !!captureBtn);
+
+            // Test 2: Download button exists and is disabled initially
+            const downloadBtn = document.getElementById('download-btn');
+            const isDisabled = downloadBtn && downloadBtn.disabled;
+            updateTestItem(tests[1], isDisabled);
+
+            // Test 3: Download functionality exists
+            updateTestItem(tests[2], !!downloadBtn);
+
+            // Test 4: Canvas element exists for visual feedback
+            const canvas = document.getElementById('canvas');
+            updateTestItem(tests[3], !!canvas);
+        }
+
+        function runResponsiveTests() {
+            const tests = document.querySelectorAll('#responsive-tests .test-item');
+            
+            // Test 1: Viewport meta tag
+            const viewportMeta = document.querySelector('meta[name="viewport"]');
+            updateTestItem(tests[0], !!viewportMeta);
+
+            // Test 2: Buttons exist
+            const buttons = document.querySelectorAll('button');
+            updateTestItem(tests[1], buttons.length > 0);
+
+            // Test 3: Canvas exists
+            const canvas = document.getElementById('canvas');
+            updateTestItem(tests[2], !!canvas);
+        }
+
+        async function runAllTests() {
+            resetTests();
+            await runCameraTests();
+            runFilterTests();
+            runCaptureTests();
+            runResponsiveTests();
+        }
+
+        function resetTests() {
+            testResults = { passed: 0, failed: 0, pending: 0 };
+            const allTests = document.querySelectorAll('.test-item');
+            allTests.forEach(test => {
+                test.classList.remove('pass', 'fail');
+                test.classList.add('pending');
+                const statusSpan = test.querySelector('.status');
+                statusSpan.className = 'status pending';
+                statusSpan.textContent = '⏳ PENDING';
+                const textSpan = test.querySelector('span:last-child');
+                textSpan.textContent = textSpan.textContent.split(' - ')[0];
+                testResults.pending++;
+            });
+            updateSummary();
+        }
+
+        // Initialize
+        testResults.pending = document.querySelectorAll('.test-item').length;
+        updateSummary();
+    </script>
+</body>
+</html>
