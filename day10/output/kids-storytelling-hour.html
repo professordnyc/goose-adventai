@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kid's Storytelling Hour - Winter Festival 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            padding: 40px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .poster-container {
+            background: #e0f7fa;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 50%);
+            border: 8px solid #00796b;
+            border-radius: 25px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.4);
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .poster-container::before {
+            content: "⛄ ❄ ⛄ ❄ ⛄ ❄ ⛄ ❄ ⛄ ❄ ⛄";
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            font-size: 20px;
+            color: #ff4081;
+            text-shadow: 1px 1px 2px rgba(0, 121, 107, 0.3);
+        }
+        
+        .poster-container::after {
+            content: "❄ ⛄ ❄ ⛄ ❄ ⛄ ❄ ⛄ ❄ ⛄ ❄";
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            font-size: 20px;
+            color: #ff4081;
+            text-shadow: 1px 1px 2px rgba(0, 121, 107, 0.3);
+        }
+        
+        .content-wrapper {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #ff4081;
+            font-size: 48px;
+            margin: 20px 0;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 255, 255, 0.5);
+            line-height: 1.2;
+        }
+        
+        .snowflake-decoration {
+            font-size: 36px;
+            color: #00796b;
+            display: inline-block;
+            margin: 0 15px;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+        
+        .subtitle {
+            color: #00796b;
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        .details {
+            color: #00796b;
+            font-size: 24px;
+            margin: 10px 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+        }
+        
+        .event-type {
+            color: #ff4081;
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            font-size: 30px;
+            color: #ff4081;
+        }
+        
+        .corner-snowflake {
+            position: absolute;
+            font-size: 40px;
+            color: #ff4081;
+            text-shadow: 2px 2px 4px rgba(0, 121, 107, 0.3);
+        }
+        
+        .corner-snowflake.top-left {
+            top: 50px;
+            left: 20px;
+            transform: rotate(-15deg);
+        }
+        
+        .corner-snowflake.top-right {
+            top: 50px;
+            right: 20px;
+            transform: rotate(15deg);
+        }
+        
+        .corner-snowflake.bottom-left {
+            bottom: 50px;
+            left: 20px;
+            transform: rotate(15deg);
+        }
+        
+        .corner-snowflake.bottom-right {
+            bottom: 50px;
+            right: 20px;
+            transform: rotate(-15deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        <div class="corner-snowflake top-left">⛄</div>
+        <div class="corner-snowflake top-right">⛄</div>
+        <div class="corner-snowflake bottom-left">✨</div>
+        <div class="corner-snowflake bottom-right">✨</div>
+        
+        <div class="content-wrapper">
+            <h1>
+                <span class="snowflake-decoration">❄</span>
+                Kid's Storytelling Hour
+                <span class="snowflake-decoration">❄</span>
+            </h1>
+            
+            <div class="subtitle">Winter Festival 2025</div>
+            
+            <div class="details">📅 December 17, 3pm-4pm</div>
+            <div class="details">📍 Storytelling Tent</div>
+            <div class="event-type">⛄ Kids Event ⛄</div>
+            
+            <div class="footer">✨ ❄ ⛄ ❄ ✨</div>
+        </div>
+    </div>
+</body>
+</html>

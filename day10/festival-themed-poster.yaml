@@ -1,0 +1,109 @@
+version: 1.0.0
+title: Festival Themed Poster Generator
+description: Generate customized HTML posters for Winter Festival events using parameters and conditional logic
+
+prompt: |
+  IMMEDIATELY generate a festival poster HTML file using the text_editor tool. Do not wait for further input.
+  
+  PARAMETERS PROVIDED:
+  - Event Name: {{ event_name }}
+  - Date/Time: {{ event_datetime }}
+  - Location: {{ location }}
+  - Event Type: {{ event_type }}
+  
+  WINTER FESTIVE STYLING (APPLIES TO ALL EVENT TYPES):
+  - Add decorative snowflake symbols (❄ ✨ ⛄) around the content
+  - Include festive border with seasonal winter pattern
+  - Add "Winter Festival 2025" subtitle below the event name
+  - Festive font styling with text shadows for depth
+  - Include decorative winter elements that complement event type colors
+  - Subtle winter gradient or pattern overlay
+  
+  STYLING RULES BY EVENT TYPE:
+  
+  FOOD:
+  - Background: #fdf6e3 (cream) with winter overlay
+  - Text color: #b5651d (brown)
+  - Heading color: #8b4513 (saddle brown)
+  - Winter accent: Warm gingerbread/cinnamon themed snowflakes
+  - Border: Dotted pattern with cookie/pastry motifs
+  
+  KIDS:
+  - Background: #e0f7fa (light cyan) with winter overlay
+  - Text color: #00796b (teal)
+  - Heading color: #ff4081 (pink)
+  - Winter accent: Playful snowmen ⛄ and colorful snowflakes
+  - Border: Fun, rounded winter characters style
+  
+  PERFORMANCE:
+  - Background: #f5f5f5 (light gray) with winter overlay
+  - Text color: #333333 (dark gray)
+  - Heading color: #2c3e50 (dark blue-gray)
+  - Heading style: italic
+  - Winter accent: Elegant silver/gold sparkles ✨
+  - Border: Sophisticated double-line with corner snowflakes
+  
+  COMPETITION:
+  - Background: #fff3e0 (light orange) with winter overlay
+  - Text color: #e65100 (deep orange)
+  - Heading color: #d32f2f (red)
+  - Heading style: uppercase
+  - Winter accent: Bold energetic snowflake burst patterns
+  - Border: Dynamic angular winter design with trophy motifs
+  
+  WORKSHOP:
+  - Background: #ede7f6 (light purple) with winter overlay
+  - Text color: #4527a0 (deep purple)
+  - Heading color: #311b92 (indigo)
+  - Winter accent: Crafty intricate snowflake patterns
+  - Border: Creative decorative winter frame
+  
+  HTML STRUCTURE REQUIRED:
+  - Complete HTML5 document with DOCTYPE
+  - Embedded CSS in <style> tag
+  - Centered layout with 40px padding
+  - Main container with winter-themed border (15px padding, border-radius, box-shadow)
+  - H1 heading: 48px font size, text-shadow for depth
+  - Subtitle "Winter Festival 2025": 20px font size, italic, 15px bottom margin
+  - Decorative snowflakes before and after event name
+  - Details sections: 24px font size, 10px vertical margins
+  - Footer with snowflake decorations
+  - Arial sans-serif font family
+  - Apply conditional styling based on {{ event_type }}
+  - Combine winter festive elements with event-type specific colors
+  
+  CRITICAL EXECUTION STEPS:
+  1. IMMEDIATELY use text_editor tool with command="write"
+  2. Create complete HTML5 document structure with winter festive elements
+  3. Apply the correct color scheme for {{ event_type }} PLUS winter decorations
+  4. Include snowflake decorations (❄ ✨ ⛄) appropriate to event type
+  5. Include event name as H1 with decorative snowflakes
+  6. Add "Winter Festival 2025" subtitle
+  7. Include date/time, location, and event type as details
+  8. Add festive border matching event type theme
+  9. Save to: C:/Users/profe/Documents/projects/goose-adventai/day10/output/{{ event_name | replace(" ", "-") | lower }}.html
+  10. After saving, verify file exists
+  11. Report: "Festival poster created and saved to: [full file path]"
+  
+  BEGIN GENERATION NOW - DO NOT ASK FOR CONFIRMATION OR ADDITIONAL INPUT.
+
+parameters:
+  - key: event_name
+    requirement: required
+    input_type: string
+    description: "Name of the festival event"
+
+  - key: event_datetime
+    requirement: required
+    input_type: string
+    description: "Date and time of the event"
+
+  - key: location
+    requirement: required
+    input_type: string
+    description: "Location where the event takes place"
+
+  - key: event_type
+    requirement: required
+    input_type: string
+    description: "Type of event: food, kids, performance, competition, workshop"

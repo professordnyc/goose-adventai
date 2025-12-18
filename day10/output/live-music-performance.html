@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Music Performance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Winter Theme */
+        :root {
+            --snow-white: #FFFFFF;
+            --ice-blue: #E3F2FD;
+            --frost-blue: #BBDEFB;
+            --winter-blue: #64B5F6;
+            --deep-blue: #1976D2;
+            --text-dark: #263238;
+            --text-light: #546E7A;
+            --gold-accent: #FFD54F;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --font-story: 'Merriweather', serif;
+            --font-ui: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, var(--ice-blue) 0%, var(--frost-blue) 100%);
+            min-height: 100vh;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Festive Container */
+        .poster-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            color: #333333;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 60px rgba(100, 181, 246, 0.2);
+            backdrop-filter: blur(10px);
+            border: 3px solid var(--frost-blue);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #2c3e50;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-family: var(--font-ui);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 0.5px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .details {
+            font-size: 24px;
+            margin: 10px 0;
+            font-family: var(--font-story);
+            line-height: 1.6;
+        }
+
+        /* Decorative border */
+        .poster-container::before {
+            content: '❄️ ✨ ❄️ ✨ ❄️ ✨ ❄️ ✨ ❄️';
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .poster-container::after {
+            content: '✨ ❄️ ✨ ❄️ ✨ ❄️ ✨ ❄️ ✨';
+            display: block;
+            font-size: 2rem;
+            margin-top: 1.5rem;
+            opacity: 0.8;
+        }
+
+        /* Falling Snowflakes */
+        .snowflake {
+            position: fixed;
+            color: white;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            body {
+                padding: var(--spacing-md);
+            }
+            
+            .poster-container {
+                padding: var(--spacing-lg);
+                border-radius: 12px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .details {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        <h1>Live Music Performance</h1>
+        <div class="details">📅 December 18, 7pm-9pm</div>
+        <div class="details">📍 Main Stage</div>
+        <div class="details">🎭 Performance</div>
+    </div>
+
+    <script>
+        // Create falling snowflakes
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = Math.random() * 1.5 + 0.5 + 'rem';
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        // Generate snowflakes periodically
+        setInterval(createSnowflake, 200);
+    </script>
+</body>
+</html>
