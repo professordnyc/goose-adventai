@@ -73,3 +73,8 @@ Attempts to run Goose CLI in PowerShell and WSL led to persistent `Session not f
 
 ## 📂 Viewing the Schedule
 Once pushed to the repo, navigate to:
+day13/schedule.html
+
+- **Local file**: Clone the repo, navigate to `day13/`, and open `schedule.html` in your browser.  
+
+  
