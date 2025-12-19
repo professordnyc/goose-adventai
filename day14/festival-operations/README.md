@@ -19,7 +19,7 @@ The skill is defined in `skill.yaml` (minimal YAML frontmatter with `name` and `
 ---
 
 ## File Structure
-```
+```text
 ~/.config/goose/skills/festival-operations/
 ├── SKILL.md                 # Human-readable documentation/playbook
 ├── skill.yaml               # Minimal manifest (name + description)
