@@ -38,3 +38,6 @@ build/
 .vscode/
 # Local Netlify folder
 .netlify
+
+# Ignore local Goose runtime skills (not part of repo)
+/.config/goose/skills/
