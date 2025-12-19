@@ -1,0 +1,11 @@
+name: festival-operations
+description: Tools for managing festival logistics
+tools:
+  - name: schedule
+    description: Create and manage festival schedules
+  - name: vendors
+    description: Track vendor assignments and needs
+  - name: volunteers
+    description: Assign and coordinate volunteer shifts
+  - name: budget
+    description: Monitor festival expenses and revenue
