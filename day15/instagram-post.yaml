@@ -1,0 +1,45 @@
+name: instagram-post
+title: Instagram Post Generator
+description: Generate an Instagram post with caption, hashtags, and emoji for a festival event
+version: "1.0.0"
+
+parameters:
+  - key: event_name
+    input_type: string
+    requirement: required
+    description: Name of the festival event
+  - key: event_date
+    input_type: string
+    requirement: required
+    description: When the event is happening
+  - key: event_description
+    input_type: string
+    requirement: required
+    description: What the event is about
+  - key: target_audience
+    input_type: string
+    requirement: required
+    description: Who should attend
+  - key: call_to_action
+    input_type: string
+    requirement: required
+    description: What you want people to do
+
+instructions: |
+  Create an engaging Instagram post for the following event:
+  
+  Event Name: {{ event_name }}
+  Event Date: {{ event_date }}
+  Description: {{ event_description }}
+  Target Audience: {{ target_audience }}
+  Call to Action: {{ call_to_action }}
+  
+  Requirements:
+  - Create a captivating caption (2-3 short paragraphs)
+  - Use engaging emoji throughout the caption (not overdone)
+  - Include 10-15 strategic hashtags relevant to the event
+  - Keep an authentic Instagram tone - visual, exciting, and community-focused
+  - Make it shareable and encourage engagement
+  - End with the call to action in a natural way
+  
+  Format the output clearly with the caption and hashtags separated.

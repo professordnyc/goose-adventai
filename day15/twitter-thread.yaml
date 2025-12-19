@@ -1,0 +1,48 @@
+name: twitter-thread
+title: Twitter/X Thread Generator
+description: Generate a Twitter/X thread (3-5 tweets) for a festival event
+version: "1.0.0"
+
+parameters:
+  - key: event_name
+    input_type: string
+    requirement: required
+    description: Name of the festival event
+  - key: event_date
+    input_type: string
+    requirement: required
+    description: When the event is happening
+  - key: event_description
+    input_type: string
+    requirement: required
+    description: What the event is about
+  - key: target_audience
+    input_type: string
+    requirement: required
+    description: Who should attend
+  - key: call_to_action
+    input_type: string
+    requirement: required
+    description: What you want people to do
+
+instructions: |
+  Create an engaging Twitter/X thread for the following event:
+  
+  Event Name: {{ event_name }}
+  Event Date: {{ event_date }}
+  Description: {{ event_description }}
+  Target Audience: {{ target_audience }}
+  Call to Action: {{ call_to_action }}
+  
+  Requirements:
+  - Create a thread with 3-5 tweets
+  - Tweet 1: Hook with the event announcement
+  - Middle tweets: Build excitement with key details and benefits
+  - Final tweet: Strong call to action
+  - Keep each tweet under 280 characters
+  - Use relevant emoji sparingly (1-2 per tweet max)
+  - Include 2-3 strategic hashtags in the final tweet
+  - Maintain a concise, punchy Twitter tone
+  - Number each tweet (1/, 2/, etc.)
+  
+  Format as a clear numbered thread.

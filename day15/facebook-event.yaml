@@ -1,0 +1,48 @@
+name: facebook-event
+title: Facebook Event Description Generator
+description: Generate a detailed Facebook event description with logistics
+version: "1.0.0"
+
+parameters:
+  - key: event_name
+    input_type: string
+    requirement: required
+    description: Name of the festival event
+  - key: event_date
+    input_type: string
+    requirement: required
+    description: When the event is happening
+  - key: event_description
+    input_type: string
+    requirement: required
+    description: What the event is about
+  - key: target_audience
+    input_type: string
+    requirement: required
+    description: Who should attend
+  - key: call_to_action
+    input_type: string
+    requirement: required
+    description: What you want people to do
+
+instructions: |
+  Create a comprehensive Facebook event description for the following event:
+  
+  Event Name: {{ event_name }}
+  Event Date: {{ event_date }}
+  Description: {{ event_description }}
+  Target Audience: {{ target_audience }}
+  Call to Action: {{ call_to_action }}
+  
+  Requirements:
+  - Write a detailed, informative event description (4-6 paragraphs)
+  - Start with an engaging opening that explains what the event is
+  - Include all important details and logistics
+  - Explain what attendees can expect to experience
+  - Cover who should attend and why
+  - Use a warm, community-focused Facebook tone
+  - Include relevant emoji but keep it professional
+  - End with a clear call to action
+  - Format with clear sections using line breaks for readability
+  
+  Make it feel welcoming and informative, as if written by a friendly event organizer.

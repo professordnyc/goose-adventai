@@ -1,0 +1,75 @@
+name: social-campaign
+title: Social Media Campaign Orchestrator
+description: Orchestrate a complete social media campaign across Instagram, Twitter/X, and Facebook
+version: "1.0.0"
+
+parameters:
+  - key: event_name
+    input_type: string
+    requirement: required
+    description: Name of the festival event
+  - key: event_date
+    input_type: string
+    requirement: required
+    description: When the event is happening
+  - key: event_description
+    input_type: string
+    requirement: required
+    description: What the event is about
+  - key: target_audience
+    input_type: string
+    requirement: required
+    description: Who should attend
+  - key: call_to_action
+    input_type: string
+    requirement: required
+    description: What you want people to do
+
+instructions: |
+  You are orchestrating a complete social media campaign for:
+  
+  Event: {{ event_name }}
+  Date: {{ event_date }}
+  Description: {{ event_description }}
+  Target Audience: {{ target_audience }}
+  Call to Action: {{ call_to_action }}
+  
+  You will generate platform-specific content for Instagram, Twitter/X, and Facebook by calling specialized sub-recipes.
+  
+  Please coordinate the following:
+  1. Generate Instagram content using the instagram-post recipe
+  2. Generate Twitter/X thread using the twitter-thread recipe
+  3. Generate Facebook event description using the facebook-event recipe
+  
+  Present the complete campaign with clear sections for each platform.
+
+tasks:
+  - name: generate_instagram_content
+    description: Create Instagram post with caption and hashtags
+    recipe: instagram-post
+    inputs:
+      event_name: "{{ event_name }}"
+      event_date: "{{ event_date }}"
+      event_description: "{{ event_description }}"
+      target_audience: "{{ target_audience }}"
+      call_to_action: "{{ call_to_action }}"
+  
+  - name: generate_twitter_thread
+    description: Create Twitter/X thread
+    recipe: twitter-thread
+    inputs:
+      event_name: "{{ event_name }}"
+      event_date: "{{ event_date }}"
+      event_description: "{{ event_description }}"
+      target_audience: "{{ target_audience }}"
+      call_to_action: "{{ call_to_action }}"
+  
+  - name: generate_facebook_event
+    description: Create Facebook event description
+    recipe: facebook-event
+    inputs:
+      event_name: "{{ event_name }}"
+      event_date: "{{ event_date }}"
+      event_description: "{{ event_description }}"
+      target_audience: "{{ target_audience }}"
+      call_to_action: "{{ call_to_action }}"
