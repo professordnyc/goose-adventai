@@ -61,7 +61,7 @@ A beautiful, festive countdown timer for the Winter Festival 2026, featuring a m
 
 1. **Clone or download this repository**
    ```bash
-   git clone <repository-url>
+   git clone <https://github.com/professordnyc/goose-adventai.git>
    cd day16
    ```
 
