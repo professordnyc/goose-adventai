@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Winter Festival Countdown - Join us for a magical celebration on December 1, 2026!">
+    <title>Winter Festival Countdown</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1 class="title">Winter Festival 2026</h1>
+            <p class="subtitle">A Magical Celebration Awaits</p>
+        </header>
+
+        <!-- Countdown Section -->
+        <section class="countdown-section" aria-label="Festival countdown timer">
+            <h2 class="countdown-heading">Countdown to Magic</h2>
+            <div class="countdown-timer" role="timer" aria-live="polite">
+                <div class="time-unit">
+                    <span class="time-value" id="days">000</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="hours">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="minutes">00</span>
+                    <span class="time-label">Minutes</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="seconds">00</span>
+                    <span class="time-label">Seconds</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fun Facts Section -->
+        <section class="fun-facts-section" aria-label="Festival fun facts">
+            <div class="fun-fact-container">
+                <p class="fun-fact" id="funFact">Loading festival facts...</p>
+            </div>
+        </section>
+
+        <!-- Email Signup Section -->
+        <section class="email-signup-section" aria-label="Email signup form">
+            <h2 class="signup-heading">Stay Updated</h2>
+            <p class="signup-description">Sign up to receive festival updates and exclusive early-bird offers!</p>
+            <form class="email-form" id="emailForm">
+                <div class="form-group">
+                    <label for="email" class="visually-hidden">Email address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email" 
+                        required 
+                        aria-required="true"
+                        class="email-input"
+                    >
+                    <button type="submit" class="submit-button">Join the Celebration</button>
+                </div>
+                <div class="form-message" id="formMessage" role="alert" aria-live="polite"></div>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Winter Festival. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <!-- Snowfall Animation Container -->
+    <div class="snowfall" aria-hidden="true"></div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
