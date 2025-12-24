@@ -1,0 +1,25 @@
+{
+  "name": "winter-fairy-wishbox",
+  "version": "1.0.0",
+  "description": "A magical MCP-UI wishbox server for Day 17 - built with winter fairy magic",
+  "main": "src/server.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "keywords": ["mcp", "wishbox", "winter", "fairy"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
